@@ -1,10 +1,14 @@
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/essentails.dart';
+import 'package:we_fast/models/booking_model.dart';
 import 'package:we_fast/widgets/start_stop_widget.dart';
 
 class BookingTile extends StatelessWidget {
-  const BookingTile({Key? key}) : super(key: key);
-
+  const BookingTile({
+    Key? key,
+    required this.bookingModel,
+  }) : super(key: key);
+  final BookingModel bookingModel;
   @override
   Widget build(BuildContext context) {
     return Padding(

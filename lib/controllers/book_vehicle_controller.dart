@@ -17,6 +17,7 @@ class BookVehicleController extends GetxController {
   TextEditingController recieverMobile = TextEditingController(text: '+91');
   TextEditingController aditionalNotes = TextEditingController();
   TextEditingController couponCode = TextEditingController();
+  TextEditingController loadWeight = TextEditingController();
   static List<CountryModel> countries = <CountryModel>[
     CountryModel('+91', 'assets/images/india.png', 'India'),
     CountryModel('+1', 'assets/images/usa.png', 'USA')

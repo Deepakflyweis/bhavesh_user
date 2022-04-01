@@ -1,10 +1,14 @@
 import 'package:we_fast/constants/constants.dart';
+import 'package:we_fast/controllers/bookingListController.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/widgets/appbar.dart';
 import 'package:we_fast/widgets/booking_tile.dart';
+import 'package:we_fast/widgets/empty_widget.dart';
+import 'package:we_fast/widgets/error_widget.dart';
 
-class BookingScreen extends StatelessWidget {
-  const BookingScreen({Key? key}) : super(key: key);
+class BookingScreen extends GetView<BookingListController> {
+  BookingListController _bookingListController =
+      Get.put(BookingListController());
   @override
   Widget build(BuildContext context) {
     final TextEditingController searchBooking = TextEditingController();
@@ -50,9 +54,15 @@ class BookingScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
                 ),
-                child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => BookingTile()),
+                child: controller.obx(
+                    ((state) => ListView.builder(
+                        itemCount: state!.length,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) => BookingTile(
+                              bookingModel: state[index],
+                            ))),
+                    onError: (err) => CustomErrorWidget(err: err.toString()),
+                    onEmpty: CustomEmptyWidget(msg: "No Booking Right Now")),
               ),
             ),
           )

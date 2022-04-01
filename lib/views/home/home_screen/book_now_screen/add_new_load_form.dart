@@ -182,8 +182,7 @@ class AddNewLoadForm extends StatelessWidget {
                             children: [
                               TextField(
                                 style: TextStyle(fontSize: 12.sp),
-                                controller:
-                                    bookVehicleController.recieverMobile,
+                                controller: bookVehicleController.loadWeight,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                     hintText: "Enter Weight",
