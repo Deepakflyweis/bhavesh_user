@@ -1,16 +1,18 @@
 import 'dart:convert';
-
-import 'package:we_fast/constants/vehicle_details_json.dart';
+import 'package:we_fast/api_provider/api_client.dart';
+import 'package:we_fast/api_provider/providers/goodtypes_endpoint.dart';
+import 'package:we_fast/api_provider/providers/vehicle_type_endpoint.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/models/country_model.dart';
+import 'package:we_fast/models/goods_model.dart';
 import 'package:we_fast/models/payment_methods_model.dart';
 import 'package:we_fast/models/vehicle_details_model.dart';
 
-class BookVehicleController extends GetxController {
+class BookVehicleController extends GetxController
+    with StateMixin<List<VehicleDetailsModel>> {
   GlobalKey<FormState> formKey = GlobalKey();
   late Rx<VehicleDetailsModel> selectedVehicle;
-  List<VehicleDetailsModel> allVehicles = vehicleDetailsModelFromJson(
-      jsonEncode(VehicleDetailsJson.vehicleDetailsJson));
+  List<VehicleDetailsModel> allVehicles = [];
   TextEditingController senderName = TextEditingController();
   TextEditingController senderMobile = TextEditingController(text: '+91');
   TextEditingController recieverName = TextEditingController();
@@ -49,20 +51,9 @@ class BookVehicleController extends GetxController {
     paidBy(value);
   }
 
-  static List<String> tempGoodsList = [
-    'food',
-    'Electronics',
-    'Chemicals',
-    'Catering',
-    'Building',
-    'Suplements',
-    'Equipments',
-    'MobilePhones',
-    'Earphones',
-    'Stationary'
-  ];
-  Rx<String?> selectedGoodType = (null as String?).obs;
-  selectGoodType(String? value) {
+  RxList<GoodsModel> goodsList = <GoodsModel>[].obs;
+  Rx<GoodsModel?> selectedGoodType = (null as GoodsModel?).obs;
+  selectGoodType(GoodsModel? value) {
     selectedGoodType(value);
   }
 
@@ -117,11 +108,41 @@ class BookVehicleController extends GetxController {
     if (pickedDate != null) dropDate.value = pickedDate;
   }
 
+  callGetAllGoodsApi() {
+    Client client = Client();
+    GoodTypesEndPointProvider goodTypesEndPointProvider =
+        GoodTypesEndPointProvider(client: client.init());
+    goodTypesEndPointProvider.getGoodTypes().then((value) {
+      goodsList.addAll(value);
+      goodsList.refresh();
+    });
+  }
+
+  callGetAllVehicleApi() {
+    Client client = Client();
+    VehicleTypeEndPointProvider vehicleTypeEndPointProvider =
+        VehicleTypeEndPointProvider(client: client.init());
+    try {
+      vehicleTypeEndPointProvider.getVehicleType().then((value) {
+        if (value.isNotEmpty) {
+          allVehicles.addAll(value);
+          selectedVehicle = value[0].obs;
+          change(allVehicles, status: RxStatus.success());
+        } else {
+          change(null, status: RxStatus.empty());
+        }
+      }, onError: (err) {
+        change(null, status: RxStatus.error(err));
+      });
+    } on Exception catch (e) {
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
   @override
   void onInit() {
-    selectedVehicle =
-        VehicleDetailsModel.fromJson(VehicleDetailsJson.vehicleDetailsJson[0])
-            .obs;
+    callGetAllVehicleApi();
+    callGetAllGoodsApi();
     super.onInit();
   }
 }

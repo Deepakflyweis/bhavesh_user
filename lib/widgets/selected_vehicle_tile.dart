@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/essentails.dart';
 
-
 class SelectedVehicleTile extends StatelessWidget {
-  const SelectedVehicleTile({Key? key,required this.title,required this.img,required this.wheels,required this.amount}) : super(key: key);
-  final String img,title,wheels,amount;
+  const SelectedVehicleTile(
+      {Key? key,
+      required this.title,
+      required this.img,
+      required this.wheels,
+      required this.amount})
+      : super(key: key);
+  final String img, title, wheels, amount;
   @override
   Widget build(BuildContext context) {
     return PhysicalModel(
@@ -15,7 +20,12 @@ class SelectedVehicleTile extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Image.asset(img,height: 8.h,),
+            Image.network(img,
+                height: 8.h,
+                errorBuilder: (context, Object, StackTrace) => Center(
+                        child: Icon(
+                      Icons.image,
+                    ))),
             Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,48 +35,67 @@ class SelectedVehicleTile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(title,style: TextStyle(fontSize: 14.sp),),
-                    Icon(Icons.info_outline,color: AppColors.primaryColor,size: 16.sp,)
+                    Text(
+                      title,
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
+                    Icon(
+                      Icons.info_outline,
+                      color: AppColors.primaryColor,
+                      size: 16.sp,
+                    )
                   ],
                 ),
-                Text(wheels,style: TextStyle(fontSize: 13.sp,color: Colors.grey),),
-                Text(amount,style: TextStyle(fontSize: 13.sp,color: Colors.grey),),
+                Text(
+                  "Wheels: " + wheels,
+                  style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                ),
+                Text(
+                  amount,
+                  style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                ),
               ],
             ),
-            Spacer(flex: 3,),
+            Spacer(
+              flex: 3,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.back();
                   },
                   child: Container(
                     height: 4.h,
                     width: 20.w,
                     decoration: BoxDecoration(
-                      gradient: AppColors.buttonGradientPurple,
-                      borderRadius: BorderRadius.circular(4)
-                    ),
+                        gradient: AppColors.buttonGradientPurple,
+                        borderRadius: BorderRadius.circular(4)),
                     child: Center(
-                      child: Text('Change',style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        'Change',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 InkWell(
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                   child: Container(
                     height: 4.h,
                     width: 20.w,
                     decoration: BoxDecoration(
                         gradient: AppColors.buttonGradientPurple,
-                        borderRadius: BorderRadius.circular(4)
-                    ),
+                        borderRadius: BorderRadius.circular(4)),
                     child: Center(
-                      child: Text('Add',style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        'Add',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 )

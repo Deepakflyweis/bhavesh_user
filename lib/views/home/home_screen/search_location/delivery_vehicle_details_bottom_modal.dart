@@ -64,7 +64,7 @@ class DeliveryVehicleDetailsBottomModal extends StatelessWidget {
                                           children: [
                                             Text(
                                               _bookVehicleController
-                                                  .selectedVehicle.value.title,
+                                                  .selectedVehicle.value.name,
                                               style: TextStyle(fontSize: 11.sp),
                                             ),
                                             Padding(
@@ -72,7 +72,9 @@ class DeliveryVehicleDetailsBottomModal extends StatelessWidget {
                                                   const EdgeInsets.all(8.0),
                                               child: Image.asset(
                                                 _bookVehicleController
-                                                    .selectedVehicle.value.img,
+                                                    .selectedVehicle
+                                                    .value
+                                                    .image,
                                                 height: 20.w,
                                               ),
                                             ),
@@ -109,7 +111,7 @@ class DeliveryVehicleDetailsBottomModal extends StatelessWidget {
                                               height: 20.w,
                                             ),
                                             Text(
-                                              'Searching nearby ${_bookVehicleController.selectedVehicle.value.title}',
+                                              'Searching nearby ${_bookVehicleController.selectedVehicle.value.name}',
                                               style: TextStyle(
                                                 fontSize: 11.sp,
                                               ),
@@ -130,7 +132,7 @@ class DeliveryVehicleDetailsBottomModal extends StatelessWidget {
                                         ),
                                         Text(
                                           _bookVehicleController
-                                              .selectedGoodType.value!,
+                                              .selectedGoodType.value!.name,
                                           style: TextStyle(
                                               fontSize: 11.sp,
                                               color: Colors.blue),

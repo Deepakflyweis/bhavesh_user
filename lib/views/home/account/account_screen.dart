@@ -5,7 +5,9 @@ import 'package:we_fast/essentails.dart';
 import 'package:we_fast/widgets/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_fast/widgets/buttons/border_button.dart';
+import 'package:we_fast/widgets/error_widget.dart';
 
+import '../../drawer/manage_profile/manage_profile.dart';
 import '../../login/login_screen.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -48,24 +50,34 @@ class AccountScreen extends StatelessWidget {
                     '${AppName.appName}',
                     style: TextStyle(color: Colors.black, fontSize: 15.sp),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        '${UserInfo.userName}',
-                        style: TextStyle(fontSize: 12.sp),
-                      ),
-                      Spacer(),
-                      Text(
-                        '${UserInfo.email}',
-                        style: TextStyle(fontSize: 10.sp, color: Colors.grey),
-                      ),
-                    ],
-                  ),
+                  accountController.obx(
+                      (state) => Row(
+                            children: [
+                              Text(
+                                state!.name,
+                                style: TextStyle(fontSize: 12.sp),
+                              ),
+                              Spacer(),
+                              Text(
+                                state.phoneNumber,
+                                style: TextStyle(
+                                    fontSize: 10.sp, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                      onError: (err) => CustomErrorWidget(
+                            err: err,
+                          )),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      'Edit Profile',
-                      style: TextStyle(color: AppColors.primaryColor),
+                    child: TextButton(
+                      onPressed: () {
+                        Get.to(() => ManageProfileScreen());
+                      },
+                      child: Text(
+                        'Edit Profile',
+                        style: TextStyle(color: AppColors.primaryColor),
+                      ),
                     ),
                   ),
                   Row(

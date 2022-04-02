@@ -41,8 +41,3 @@ class RupeeSymbol {
 class AppName {
   static String appName = 'AppName';
 }
-
-class UserInfo {
-  static String userName = 'UserName';
-  static String email = 'xyz@gmai.com';
-}

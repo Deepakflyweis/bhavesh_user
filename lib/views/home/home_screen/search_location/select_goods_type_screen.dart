@@ -15,20 +15,20 @@ class SelectGoodsType extends StatelessWidget {
         children: [
           ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: BookVehicleController.tempGoodsList.length,
+            itemCount: bookVehicleController.goodsList.length,
             itemBuilder: (context, index) => Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 0.5),
               ),
               child: InkWell(
                 onTap: () {
-                  bookVehicleController.selectGoodType(
-                      BookVehicleController.tempGoodsList[index]);
+                  bookVehicleController
+                      .selectGoodType(bookVehicleController.goodsList[index]);
                   Get.back();
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Text(BookVehicleController.tempGoodsList[index],
+                  child: Text(bookVehicleController.goodsList[index].name,
                       style: TextStyle(
                         fontSize: 13.sp,
                       )),

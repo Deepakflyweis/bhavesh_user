@@ -4,38 +4,66 @@
 
 import 'dart:convert';
 
-List<VehicleDetailsModel> vehicleDetailsModelFromJson(String str) => List<VehicleDetailsModel>.from(json.decode(str).map((x) => VehicleDetailsModel.fromJson(x)));
+List<VehicleDetailsModel> vehicleDetailsModelFromJson(String str) =>
+    List<VehicleDetailsModel>.from(
+        json.decode(str).map((x) => VehicleDetailsModel.fromJson(x)));
 
-String vehicleDetailsModelToJson(List<VehicleDetailsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String vehicleDetailsModelToJson(List<VehicleDetailsModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class VehicleDetailsModel {
   VehicleDetailsModel({
-    required this.title,
-    required this.img,
+    required this.id,
+    required this.name,
+    required this.loadWeight,
+    required this.baseFare,
+    required this.pricePerKm,
+    required this.pricePerMin,
+    required this.image,
     required this.dimensionImage,
-    required this.amount,
     required this.wheels,
+    required this.lowercaseName,
+    required this.roadClearance,
   });
 
-  String title;
-  String img;
+  String id;
+  String name;
+  int loadWeight;
+  int baseFare;
+  int pricePerKm;
+  int pricePerMin;
+  String image;
   String dimensionImage;
-  int amount;
-  String wheels;
+  int wheels;
+  String lowercaseName;
+  String roadClearance;
 
-  factory VehicleDetailsModel.fromJson(Map<String, dynamic> json) => VehicleDetailsModel(
-    title: json["title"],
-    img: json["img"],
-    dimensionImage: json["dimensionImage"],
-    amount: json["amount"],
-    wheels: json["wheels"],
-  );
+  factory VehicleDetailsModel.fromJson(Map<String, dynamic> json) =>
+      VehicleDetailsModel(
+        id: json["id"],
+        name: json["name"],
+        loadWeight: json["loadWeight"],
+        baseFare: json["baseFare"],
+        pricePerKm: json["pricePerKm"],
+        pricePerMin: json["pricePerMin"],
+        image: json["image"],
+        dimensionImage: json["dimensionImage"],
+        wheels: json["wheels"],
+        lowercaseName: json["lowercaseName"],
+        roadClearance: json["roadClearance"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "title": title,
-    "img": img,
-    "dimensionImage": dimensionImage,
-    "amount": amount,
-    "wheels": wheels,
-  };
+        "id": id,
+        "name": name,
+        "loadWeight": loadWeight,
+        "baseFare": baseFare,
+        "pricePerKm": pricePerKm,
+        "pricePerMin": pricePerMin,
+        "image": image,
+        "dimensionImage": dimensionImage,
+        "wheels": wheels,
+        "lowercaseName": lowercaseName,
+        "roadClearance": roadClearance,
+      };
 }

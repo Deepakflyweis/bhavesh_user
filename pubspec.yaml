@@ -32,6 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   get_storage: ^2.0.3
+  image_cropper: ^1.5.1
+  image_picker: ^0.8.4+11
 
 dev_dependencies:
   carousel_slider: ^4.0.0

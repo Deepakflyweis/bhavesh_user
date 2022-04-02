@@ -356,7 +356,7 @@ class AddCouponBottomModal extends StatelessWidget {
                                                     .selectedGoodType.value !=
                                                 null
                                             ? bookVehicleController
-                                                .selectedGoodType.value!
+                                                .selectedGoodType.value!.name
                                             : "",
                                         style: TextStyle(
                                             fontSize: 11.sp,
@@ -459,7 +459,7 @@ class AddCouponBottomModal extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: RoundedGradientButton(
                                           title:
-                                              'Book ${bookVehicleController.selectedVehicle.value.title}',
+                                              'Book ${bookVehicleController.selectedVehicle.value.name}',
                                           gradient:
                                               AppColors.buttonGradientPurple,
                                           onTap: () {

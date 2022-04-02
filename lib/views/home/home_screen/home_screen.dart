@@ -1,4 +1,5 @@
 import 'package:we_fast/constants/constants.dart';
+import 'package:we_fast/controllers/banners_controller.dart';
 import 'package:we_fast/controllers/book_vehicle_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,14 +9,16 @@ import 'package:we_fast/views/home/home_screen/search_location/search_drop_locat
 import 'package:we_fast/views/home/home_screen/search_location/search_pickup_location.dart';
 import 'package:we_fast/widgets/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:we_fast/widgets/error_widget.dart';
 import 'package:we_fast/widgets/vehicle_details_dialog_content.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<BookVehicleController> {
   HomeScreen({
     Key? key,
   }) : super(key: key);
   final BookVehicleController bookVehicleController =
       Get.put(BookVehicleController(), permanent: true);
+  BannersController _bannersController = Get.put(BannersController());
   final List<String> banners = const [
     'assets/images/banner_1.png',
     'assets/images/banner_2.png',
@@ -32,19 +35,29 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 100,
-            width: 100.w,
-            child: CarouselSlider.builder(
-              itemCount: banners.length,
-              options: CarouselOptions(
-                  autoPlay: true,
-                  enlargeCenterPage: true,
-                  aspectRatio: 16.5 / 4),
-              itemBuilder: (context, index, i) {
-                return Image.asset(banners[index]);
-              },
+          _bannersController.obx(
+            (state) => SizedBox(
+              height: 100,
+              width: 100.w,
+              child: CarouselSlider.builder(
+                itemCount: state!.length,
+                options: CarouselOptions(
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    aspectRatio: 16.5 / 4),
+                itemBuilder: (context, index, i) {
+                  return Image.network(
+                    state[index].image,
+                    errorBuilder: (context, Object, StackTrace) => Center(
+                      child: Icon(
+                        Icons.image,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
+            onError: (error) => CustomErrorWidget(err: error),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -103,217 +116,68 @@ class HomeScreen extends StatelessWidget {
           Container(
             height: 10.h,
             color: AppColors.backgroundColor,
-            child: Obx(() => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(8), //index 0 is truck
-                            color:
-                                bookVehicleController.selectedVehicle.value ==
-                                        bookVehicleController.allVehicles[0]
+            child: controller.obx(
+              (state) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state!.length,
+                  itemBuilder: ((context, index) => Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 2.w),
+                        child: Obx(
+                          () => Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(8), //index 0 is truck
+                                color: controller.selectedVehicle.value ==
+                                        state[index]
                                     ? AppColors.primaryColor.withOpacity(0.25)
                                     : Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: InkWell(
-                            onTap: () {
-                              Get.defaultDialog(
-                                  title: '',
-                                  content: VehicleDetailsDialogContent(
-                                    img: 'assets/images/truck_dimension.png',
-                                    onTap: () {
-                                      bookVehicleController.selectedVehicle(
-                                          bookVehicleController.allVehicles[0]);
-                                      Get.back();
-                                    },
-                                  ));
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Truck',
-                                  style: TextStyle(fontSize: 13.sp),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.defaultDialog(
+                                      title: state[index].name,
+                                      content: VehicleDetailsDialogContent(
+                                        vehicleDetailsModel: state[index],
+                                        onTap: () {
+                                          controller
+                                              .selectedVehicle(state[index]);
+                                          controller.selectedVehicle.refresh();
+                                          Get.back();
+                                        },
+                                      ));
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      state[index].name,
+                                      style: TextStyle(fontSize: 13.sp),
+                                    ),
+                                    Image.network(
+                                      state[index].image,
+                                      height: 4.h,
+                                      errorBuilder:
+                                          (context, Object, StackTrace) =>
+                                              Center(
+                                                  child: Icon(
+                                        Icons.image,
+                                      )),
+                                    )
+                                  ],
                                 ),
-                                Image.asset(
-                                  'assets/images/truck.png',
-                                  height: 4.h,
-                                )
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(8), //index 1 is carter
-                            color:
-                                bookVehicleController.selectedVehicle.value ==
-                                        bookVehicleController.allVehicles[1]
-                                    ? AppColors.primaryColor.withOpacity(0.25)
-                                    : Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: InkWell(
-                            onTap: () {
-                              Get.defaultDialog(
-                                  title: '',
-                                  content: VehicleDetailsDialogContent(
-                                    img: 'assets/images/carter_dimension.png',
-                                    onTap: () {
-                                      bookVehicleController.selectedVehicle(
-                                          bookVehicleController.allVehicles[1]);
-                                      Get.back();
-                                    },
-                                  ));
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Carter',
-                                  style: TextStyle(fontSize: 12.sp),
-                                ),
-                                Image.asset(
-                                  'assets/images/box-truck.png',
-                                  height: 4.h,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(8), //index 2 is 3 wheeler
-                            color:
-                                bookVehicleController.selectedVehicle.value ==
-                                        bookVehicleController.allVehicles[2]
-                                    ? AppColors.primaryColor.withOpacity(0.25)
-                                    : Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: InkWell(
-                            onTap: () {
-                              Get.defaultDialog(
-                                  title: '',
-                                  content: VehicleDetailsDialogContent(
-                                    img:
-                                        'assets/images/3_wheeler_dimension.png',
-                                    onTap: () {
-                                      bookVehicleController.selectedVehicle(
-                                          bookVehicleController.allVehicles[2]);
-                                      Get.back();
-                                    },
-                                  ));
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '3-wheeler',
-                                  style: TextStyle(fontSize: 12.sp),
-                                ),
-                                Image.asset(
-                                  'assets/images/tuk-tuk.png',
-                                  height: 4.h,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(8), //index 3 is 2 wheeler
-                            color:
-                                bookVehicleController.selectedVehicle.value ==
-                                        bookVehicleController.allVehicles[3]
-                                    ? AppColors.primaryColor.withOpacity(0.25)
-                                    : Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: InkWell(
-                            onTap: () {
-                              Get.defaultDialog(
-                                  title: '',
-                                  content: VehicleDetailsDialogContent(
-                                    img:
-                                        'assets/images/2_wheller_dimension.png',
-                                    onTap: () {
-                                      bookVehicleController.selectedVehicle(
-                                          bookVehicleController.allVehicles[3]);
-                                      Get.back();
-                                    },
-                                  ));
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '2-wheeler',
-                                  style: TextStyle(fontSize: 12.sp),
-                                ),
-                                Image.asset(
-                                  'assets/images/scooter.png',
-                                  height: 4.h,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(8), //index 4 is eeco
-                            color:
-                                bookVehicleController.selectedVehicle.value ==
-                                        bookVehicleController.allVehicles[4]
-                                    ? AppColors.primaryColor.withOpacity(0.25)
-                                    : Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: InkWell(
-                            onTap: () {
-                              //todo set eeco image
-                              Get.defaultDialog(
-                                  title: '',
-                                  content: VehicleDetailsDialogContent(
-                                    img: 'assets/images/eeco_dimensions.png',
-                                    onTap: () {
-                                      bookVehicleController.selectedVehicle(
-                                          bookVehicleController.allVehicles[4]);
-                                      Get.back();
-                                    },
-                                  ));
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Eeco',
-                                  style: TextStyle(fontSize: 12.sp),
-                                ),
-                                Image.asset(
-                                  'assets/images/van.png',
-                                  height: 4.h,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
+                      )),
+                ),
+              ),
+            ),
           ),
           Row(
             children: [

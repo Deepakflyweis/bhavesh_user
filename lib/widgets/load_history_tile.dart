@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:we_fast/constants/constants.dart';
-import 'package:we_fast/services/date_formatter.dart';
 import 'package:get/get.dart';
-import 'package:we_fast/views/drawer/loads_history/loads_history_details.dart';
 import 'package:sizer/sizer.dart';
 
+import 'package:we_fast/constants/constants.dart';
+import 'package:we_fast/models/booking_model.dart';
+import 'package:we_fast/services/date_formatter.dart';
+import 'package:we_fast/views/drawer/loads_history/loads_history_details.dart';
 
 class LoadsHistoryTile extends StatelessWidget {
-  const LoadsHistoryTile({Key? key}) : super(key: key);
+  const LoadsHistoryTile({
+    Key? key,
+    required this.bookingModel,
+  }) : super(key: key);
 
+  final BookingModel bookingModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,9 +37,12 @@ class LoadsHistoryTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/images/truck_icon2.png',
+                    child: Image.network(
+                      bookingModel.vehicleType.image,
                       height: 75,
+                      errorBuilder: (context, _, __) => const Center(
+                        child: Icon(Icons.image),
+                      ),
                     ),
                   ),
                 ),
@@ -44,18 +52,20 @@ class LoadsHistoryTile extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Start-----------Destination"),
+                    Text(bookingModel.pickupAddress +
+                        "-----------" +
+                        bookingModel.dropAddress),
                     Text(
-                      "Load Id: 23445",
+                      "Load Id: " + bookingModel.id,
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      "Load Date: ${DateFormatter.formatToTextDateTime(DateTime.now())}",
-                      style: TextStyle(color: Colors.grey,fontSize: 9.sp),
+                      "Load Date: ${DateFormatter.formatToTextDateTime(bookingModel.createdAt)}",
+                      style: TextStyle(color: Colors.grey, fontSize: 9.sp),
                     ),
                     Spacer(),
                     Text(
-                      "Load Total Amount: ${RupeeSymbol.rupeeSymbol} xxxxx",
+                      "Load Total Amount: ${RupeeSymbol.rupeeSymbol} xxxxxx", //+bookingModel.amout
                       style: TextStyle(color: Colors.green),
                     ),
                   ],
@@ -65,15 +75,13 @@ class LoadsHistoryTile extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.circular(4),
-                          gradient:
-                          AppColors.buttonGradientRed),
+                          borderRadius: BorderRadius.circular(4),
+                          gradient: AppColors.buttonGradientRed),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 3, horizontal: 7),
                         child: Text(
-                          'Cancelled',
+                          bookingModel.status,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -83,16 +91,17 @@ class LoadsHistoryTile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => LoadsHistoryDetails());
+                        Get.to(() => LoadsHistoryDetails(
+                              bookingModel: bookingModel,
+                            ));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             'View Details',
-                            style: TextStyle(
-                                color: Colors.indigo,
-                                fontSize: 12),
+                            style:
+                                TextStyle(color: Colors.indigo, fontSize: 12),
                           ),
                           Icon(
                             Icons.chevron_right,

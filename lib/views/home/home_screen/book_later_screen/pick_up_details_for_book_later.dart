@@ -99,12 +99,11 @@ class PickUpDetailsForBookLater extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   SelectedVehicleTile(
-                      title: bookVehicleController.selectedVehicle.value.title,
-                      img: bookVehicleController.selectedVehicle.value.img,
-                      wheels:
-                          bookVehicleController.selectedVehicle.value.wheels,
-                      amount: bookVehicleController.selectedVehicle.value.amount
-                          .toString()),
+                      title: bookVehicleController.selectedVehicle.value.name,
+                      img: bookVehicleController.selectedVehicle.value.image,
+                      wheels: bookVehicleController.selectedVehicle.value.wheels
+                          .toString(),
+                      amount: "2500".toString()),
                   Divider(
                     height: 1.h,
                     color: Colors.grey,

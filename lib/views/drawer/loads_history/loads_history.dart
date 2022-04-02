@@ -1,13 +1,16 @@
 import 'package:we_fast/constants/constants.dart';
+import 'package:we_fast/controllers/bookingListController.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/services/date_formatter.dart';
 import 'package:we_fast/views/drawer/loads_history/loads_history_details.dart';
 import 'package:we_fast/widgets/drawer_appbar.dart';
+import 'package:we_fast/widgets/empty_widget.dart';
+import 'package:we_fast/widgets/error_widget.dart';
 import 'package:we_fast/widgets/load_history_tile.dart';
 
-class LoadsHistory extends StatelessWidget {
-  const LoadsHistory({Key? key}) : super(key: key);
-
+class LoadsHistory extends GetView<BookingListController> {
+  LoadsHistory({Key? key}) : super(key: key);
+  BookingListController _bookingListController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +24,20 @@ class LoadsHistory extends StatelessWidget {
               children: [Text('ALL'), Icon(Icons.filter_list_outlined)],
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: 7,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) => LoadsHistoryTile()),
-          )
+          controller.obx(
+              (state) => Expanded(
+                    child: ListView.builder(
+                        itemCount: state!.length,
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) => LoadsHistoryTile(
+                              bookingModel: state[index],
+                            )),
+                  ),
+              onEmpty: CustomEmptyWidget(msg: "No Loads History"),
+              onError: (err) => CustomErrorWidget(
+                    err: err,
+                  ))
         ],
       ),
     );

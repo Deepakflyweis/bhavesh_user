@@ -1,6 +1,7 @@
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/controllers/book_vehicle_controller.dart';
 import 'package:we_fast/essentails.dart';
+import 'package:we_fast/models/goods_model.dart';
 import 'package:we_fast/widgets/buttons/rectangular_gradient_button.dart';
 import 'package:we_fast/widgets/dotted_line.dart';
 import 'package:we_fast/widgets/drawer_appbar.dart';
@@ -161,14 +162,14 @@ class AddNewLoadForm extends StatelessWidget {
                             style:
                                 TextStyle(fontSize: 11.sp, color: Colors.grey),
                           ),
-                          Obx(() => DropdownButton(
+                          Obx(() => DropdownButton<GoodsModel>(
                               isExpanded: true,
                               value:
                                   bookVehicleController.selectedGoodType.value,
                               hint: Text('Select Goods Type'),
-                              items: BookVehicleController.tempGoodsList
-                                  .map((e) => DropdownMenuItem(
-                                        child: Text(e),
+                              items: bookVehicleController.goodsList
+                                  .map((e) => DropdownMenuItem<GoodsModel>(
+                                        child: Text(e.name),
                                         value: e,
                                       ))
                                   .toList(),

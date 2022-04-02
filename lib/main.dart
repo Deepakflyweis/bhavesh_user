@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
+import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/views/splash_screen.dart';
 
 void main() async {
@@ -20,8 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          fontFamily: 'Cabin',
-        ),
+            fontFamily: 'Cabin', primaryColor: AppColors.primaryColor),
         home: SplashScreen(),
       );
     });

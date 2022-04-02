@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -21,6 +22,7 @@ class SplashController extends GetxController {
       String? token = box.read("token");
       if (token != null) {
         Client.token = token;
+        log(token);
         Get.off(() => NavBarScreen());
       } else {
         Get.off(() => LoginScreen());

@@ -1,11 +1,16 @@
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/essentails.dart';
+import 'package:we_fast/models/booking_model.dart';
 import 'package:we_fast/services/date_formatter.dart';
 import 'package:we_fast/widgets/sender_reciver_tile.dart';
 import 'package:we_fast/widgets/start_stop_widget.dart';
 
 class LoadsHistoryDetails extends StatelessWidget {
-  const LoadsHistoryDetails({Key? key}) : super(key: key);
+  const LoadsHistoryDetails({
+    Key? key,
+    required this.bookingModel,
+  }) : super(key: key);
+  final BookingModel bookingModel;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +31,11 @@ class LoadsHistoryDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Load Id: 12345",
-              style: TextStyle(color: Colors.black,fontSize: 13.sp),
+              "Load Id: " + bookingModel.id,
+              style: TextStyle(color: Colors.black, fontSize: 13.sp),
             ),
             Text(
-              DateFormatter.formatToTextDateTime(DateTime.now()),
+              DateFormatter.formatToTextDateTime(bookingModel.createdAt),
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             )
           ],
@@ -74,9 +79,12 @@ class LoadsHistoryDetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        'assets/images/truck_icon2.png',
+                      child: Image.network(
+                        bookingModel.vehicleType.image,
                         height: 75,
+                        errorBuilder: (context, _, __) => const Center(
+                          child: Icon(Icons.image),
+                        ),
                       ),
                     ),
                   ),
@@ -86,13 +94,13 @@ class LoadsHistoryDetails extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Tata Ace - 4 Wheeler"),
+                      Text(bookingModel.vehicleType.name),
                       const Text(
                         "Vehicle Number",
                         style: TextStyle(color: Colors.black),
                       ),
-                      const Text(
-                        "HR -29-XY-0001",
+                      Text(
+                        bookingModel.vehicle.vehicleNumber.toString(),
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -101,7 +109,8 @@ class LoadsHistoryDetails extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        "${RupeeSymbol.rupeeSymbol} xxxxx",
+                        "${RupeeSymbol.rupeeSymbol} " +
+                            bookingModel.amount.toString(),
                         style: const TextStyle(color: Colors.green),
                       ),
                       const Text(
@@ -113,13 +122,17 @@ class LoadsHistoryDetails extends StatelessWidget {
                 ],
               ),
             ),
-            const SenderReceiverTile(sMobile: '1234567890',sName: 'SenderName',rMobile: '1234567890',rName: 'RecieverName',),
+            SenderReceiverTile(
+              sMobile: bookingModel.senderDetails.phoneNumber,
+              sName: bookingModel.senderDetails.name,
+              rMobile: bookingModel.receiverDetails.phoneNumber,
+              rName: bookingModel.receiverDetails.name,
+            ),
             Container(
               width: 100.w,
               decoration: BoxDecoration(
                   color: Colors.blue.shade50,
-                  border: Border.all(color: Colors.grey.shade100)
-              ),
+                  border: Border.all(color: Colors.grey.shade100)),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Pickup and Drop Location'),
@@ -182,17 +195,18 @@ class LoadsHistoryDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: (){
-
-                },
+                onTap: () {},
                 child: Container(
                   height: 5.h,
                   //width: 50.w,
                   decoration: BoxDecoration(
                       gradient: AppColors.buttonGradientPurple,
-                      borderRadius: BorderRadius.circular(6)
-                  ),
-                  child: const Center(child: Text('REQUEST CANCELED',style: TextStyle(color: Colors.white),)),
+                      borderRadius: BorderRadius.circular(6)),
+                  child: const Center(
+                      child: Text(
+                    'REQUEST CANCELED',
+                    style: TextStyle(color: Colors.white),
+                  )),
                 ),
               ),
             ),
