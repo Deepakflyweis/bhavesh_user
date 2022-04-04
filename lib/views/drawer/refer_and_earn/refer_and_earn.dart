@@ -29,6 +29,7 @@ class ReferAndEarn extends StatelessWidget {
                     width: 45.w,
                   ),
                   Text(
+                    //todo set up invite and ear
                     'Invite & Earn',
                     style: TextStyle(fontSize: 13.sp),
                   ),

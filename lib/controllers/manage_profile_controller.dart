@@ -11,8 +11,10 @@ import '../api_provider/providers/user_endpoint.dart';
 
 class ManageProfileController extends GetxController
     with StateMixin<UserModel> {
+  GlobalKey<FormState> key = GlobalKey<FormState>();
   TextEditingController name = TextEditingController();
   Rx<File> image = File("").obs;
+  Rx<String?> imageUrl = (null as String?).obs;
 
   pickImage() async {
     ImagePicker picker = ImagePicker();
@@ -33,6 +35,7 @@ class ManageProfileController extends GetxController
         aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0));
     if (croppedImage != null) {
       image.value = croppedImage;
+      callUploadImageApi();
     }
   }
 
@@ -42,12 +45,37 @@ class ManageProfileController extends GetxController
         UserEndPointProvider(client: client.init());
     try {
       userEndPointProvider.getUserDetails().then((value) {
+        name.text = value.name;
+        imageUrl.value = value.profileImage;
         change(value, status: RxStatus.success());
       }, onError: (err) {
         change(null, status: RxStatus.error(err));
       });
     } on Exception catch (e) {
       change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  callEditProfileApi() async {
+    if (key.currentState!.validate() && imageUrl != "") {
+      Client client = Client();
+      UserEndPointProvider userEndPointProvider =
+          UserEndPointProvider(client: client.init());
+      try {
+        await userEndPointProvider.edituserDetails(name.text, imageUrl.value!);
+      } on Exception catch (e) {}
+    }
+  }
+
+  callUploadImageApi() async {
+    if (image.value.path != "") {
+      Client client = Client();
+      UserEndPointProvider userEndPointProvider =
+          UserEndPointProvider(client: client.init());
+      try {
+        imageUrl.value =
+            await userEndPointProvider.uploadImage(image.value.path);
+      } on Exception catch (e) {}
     }
   }
 

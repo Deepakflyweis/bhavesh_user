@@ -2,6 +2,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/controllers/account_controller.dart';
 import 'package:we_fast/essentails.dart';
+import 'package:we_fast/views/drawer/help_and_support/help_and_support.dart';
 import 'package:we_fast/widgets/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_fast/widgets/buttons/border_button.dart';
@@ -81,6 +82,7 @@ class AccountScreen extends StatelessWidget {
                     ),
                   ),
                   Row(
+                    //todo setup Invite
                     children: [Text('Invite friends '), Icon(Icons.share)],
                   ),
                   Padding(
@@ -122,6 +124,9 @@ class AccountScreen extends StatelessWidget {
                         ),
                       )),
                   ListTile(
+                    onTap: () {
+                      Get.to(() => HelpAndSupport());
+                    },
                     leading: Image.asset(
                       'assets/icons/contact_us.png',
                       height: 5.h,

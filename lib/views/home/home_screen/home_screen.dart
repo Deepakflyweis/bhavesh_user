@@ -1,6 +1,8 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/controllers/banners_controller.dart';
 import 'package:we_fast/controllers/book_vehicle_controller.dart';
+import 'package:we_fast/controllers/map_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_fast/views/home/home_screen/book_later_screen/pick_up_details_for_book_later.dart';
@@ -16,6 +18,7 @@ class HomeScreen extends GetView<BookVehicleController> {
   HomeScreen({
     Key? key,
   }) : super(key: key);
+  final MapController mapController = Get.put(MapController());
   final BookVehicleController bookVehicleController =
       Get.put(BookVehicleController(), permanent: true);
   BannersController _bannersController = Get.put(BannersController());
@@ -59,58 +62,86 @@ class HomeScreen extends GetView<BookVehicleController> {
             ),
             onError: (error) => CustomErrorWidget(err: error),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onTap: () {
-                Get.to(() => SearchPickUpLocation());
-              },
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 15),
-                  hintText: 'Pick Up Location',
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                    size: 17.sp,
+          Expanded(
+            child: Stack(
+              children: [
+                GoogleMap(
+                  zoomControlsEnabled: false,
+                  initialCameraPosition: mapController.kGooglePlex,
+                  onMapCreated: (con) {
+                    mapController.googleMapController.complete(con);
+                  },
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onTap: () {
+                        //Get.to(() => SearchPickUpLocation());
+                      },
+                      controller: mapController.pickUpController,
+                      textCapitalization: TextCapitalization.words,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 15),
+                          hintText: 'Pick Up Location',
+                          fillColor: Colors.white,
+                          filled: true,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                            size: 17.sp,
+                          ),
+                          suffixIcon: Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.grey,
+                            size: 17.sp,
+                          ),
+                          constraints: BoxConstraints(maxHeight: 4.h),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
+                            borderRadius: BorderRadius.circular(50),
+                          )),
+                    ),
                   ),
-                  suffixIcon: Icon(
-                    Icons.cancel_outlined,
-                    color: Colors.grey,
-                    size: 17.sp,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: mapController.dropController,
+                      textCapitalization: TextCapitalization.words,
+                      onTap: () {
+                        // Get.to(() => SearchDropLocation());
+                      },
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 15),
+                          hintStyle: TextStyle(fontSize: 13.sp),
+                          hintText: 'Drop Location',
+                          fillColor: Colors.white,
+                          filled: true,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                            size: 17.sp,
+                          ),
+                          suffixIcon: Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.grey,
+                            size: 17.sp,
+                          ),
+                          constraints: BoxConstraints(maxHeight: 4.h),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
+                            borderRadius: BorderRadius.circular(50),
+                          )),
+                    ),
                   ),
-                  constraints: BoxConstraints(maxHeight: 4.h),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.primaryColor),
-                    borderRadius: BorderRadius.circular(50),
-                  )),
-            ),
-          ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onTap: () {
-                Get.to(() => SearchDropLocation());
-              },
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 15),
-                  hintStyle: TextStyle(fontSize: 13.sp),
-                  hintText: 'Drop Location',
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                    size: 17.sp,
-                  ),
-                  suffixIcon: Icon(
-                    Icons.cancel_outlined,
-                    color: Colors.grey,
-                    size: 17.sp,
-                  ),
-                  constraints: BoxConstraints(maxHeight: 4.h),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.primaryColor),
-                    borderRadius: BorderRadius.circular(50),
-                  )),
+                ),
+              ],
             ),
           ),
           Container(

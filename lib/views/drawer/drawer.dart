@@ -62,7 +62,7 @@ class SideDrawer extends StatelessWidget {
                       ClipOval(
                         child: Image.network(
                           state!.profileImage ?? "",
-                          height: 5.h,
+                          height: 23.w,
                           errorBuilder: (context, _, __) => Icon(
                               Icons.account_circle_outlined,
                               color: Colors.grey,
@@ -197,6 +197,7 @@ class SideDrawer extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
                 onTap: () {
+                  //todo setup invite and earn
                   Get.off(() => ReferAndEarn());
                 },
                 leading: Image.asset(

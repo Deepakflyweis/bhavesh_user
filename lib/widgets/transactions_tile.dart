@@ -25,7 +25,7 @@ class TransactionsTile extends StatelessWidget {
             width: 10,
           ),
           SizedBox(
-            width: 45.w,
+            width: 40.w,
             child: Text.rich(
               TextSpan(
                 children: [
