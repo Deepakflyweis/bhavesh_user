@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/models/booking_model.dart';
 import 'package:we_fast/services/common_loader/common_loader.dart';
+import 'package:we_fast/services/date_formatter.dart';
 
 class BookingEndPointProvider {
   Dio client;
@@ -24,21 +26,35 @@ class BookingEndPointProvider {
     }
   }
 
-  bookNow() async {
+  bookNow(
+      {required String vehicleTypeId,
+      required String pickUpAdress,
+      required String dropAddress,
+      required List<double> pickUpLongLat,
+      required List<double> dropLongLat,
+      required Map<String, String> recieverNameNumber,
+      required Map<String, String> senderNameNumber,
+      required double loadweight,
+      required String notes,
+      required String goodsId,
+      required bool labourNeeded,
+      required senderReceiver paidBy}) async {
     CommonLoader.showLoading();
     var data = {
-      "vehicleType": "622b3a452c0469dab43fc7af",
-      "pickupAddress": "etretret4e",
-      "dropAddress": "erewr",
-      "pickupLocation": [100, 45],
-      "dropLocation": [100, 45],
-      "receiverDetails": {"name": "receiver", "phoneNumber": "8745965741"},
-      "senderDetails": {"name": "sender", "phoneNumber": "8741254785"},
-      "loadWeight": 20,
-      "notes": "ede3ds3wdewdw",
-      "goodsType": "62303b05b04d89f6e46e1460",
-      "labourNeeded": true,
-      "paidBy": "receiver"
+      "vehicleType": vehicleTypeId,
+      "pickupAddress": pickUpAdress,
+      "dropAddress": dropAddress,
+      "pickupLocation": pickUpLongLat, //[100, 45],
+      "dropLocation": dropLongLat, //[100, 45],
+      "receiverDetails":
+          recieverNameNumber, //{"name": "receiver", "phoneNumber": "8745965741"},
+      "senderDetails":
+          senderNameNumber, //{"name": "sender", "phoneNumber": "8741254785"},
+      "loadWeight": loadweight, //20,
+      "notes": notes, //"ede3ds3wdewdw",
+      "goodsType": goodsId, //"62303b05b04d89f6e46e1460",
+      "labourNeeded": labourNeeded, //true,
+      "paidBy": paidBy.name //"receiver"
     };
     try {
       Response r = await client.post("/booking", data: data);
@@ -49,27 +65,48 @@ class BookingEndPointProvider {
         CommonLoader.showErrorDialog(description: r.data["error"]);
       }
     } on DioError catch (e) {
+      print(e.response!.data);
+      CommonLoader.hideLoading();
       CommonLoader.showErrorDialog(description: e.message);
     }
   }
 
-  bookLater() async {
+  bookLater({
+    required String vehicleTypeId,
+    required String pickUpAdress,
+    required String dropAddress,
+    required List<double> pickUpLongLat,
+    required List<double> dropLongLat,
+    required Map<String, String> recieverNameNumber,
+    required Map<String, String> senderNameNumber,
+    required double loadweight,
+    required String notes,
+    required String goodsId,
+    required bool labourNeeded,
+    required senderReceiver paidBy,
+    required DateTime pickUpDate,
+    required DateTime dropDate,
+  }) async {
     CommonLoader.showLoading();
     var data = {
-      "vehicleType": "622b3a452c0469dab43fc7af",
-      "pickupAddress": "etretret4e",
-      "dropAddress": "erewr",
-      "pickupLocation": [100, 45],
-      "dropLocation": [100, 45],
-      "receiverDetails": {"name": "receiver", "phoneNumber": "8745965741"},
-      "senderDetails": {"name": "sender", "phoneNumber": "8741254785"},
-      "loadWeight": 20,
-      "notes": "ede3ds3wdewdw",
-      "goodsType": "62303b05b04d89f6e46e1460",
-      "labourNeeded": true,
-      "paidBy": "receiver",
-      "pickupDate": "2022-03-25",
-      "dropDate": "2022-03-31"
+      "vehicleType": vehicleTypeId,
+      "pickupAddress": pickUpAdress,
+      "dropAddress": dropAddress,
+      "pickupLocation": pickUpLongLat, //[100, 45],
+      "dropLocation": dropLongLat, //[100, 45],
+      "receiverDetails":
+          recieverNameNumber, //{"name": "receiver", "phoneNumber": "8745965741"},
+      "senderDetails":
+          senderNameNumber, //{"name": "sender", "phoneNumber": "8741254785"},
+      "loadWeight": loadweight, //20,
+      "notes": notes, //"ede3ds3wdewdw",
+      "goodsType": goodsId, //"62303b05b04d89f6e46e1460",
+      "labourNeeded": labourNeeded, //true,
+      "paidBy": paidBy.name, //"receiver"
+      "pickupDate": DateFormatter.formatToShashedDateWithoutTime(
+          pickUpDate), //"2022-03-25",
+      "dropDate":
+          DateFormatter.formatToShashedDateWithoutTime(dropDate) //"2022-03-31"
     };
     try {
       Response r = await client.post("/booking", data: data);
@@ -80,6 +117,8 @@ class BookingEndPointProvider {
         CommonLoader.showErrorDialog(description: r.data["error"]);
       }
     } on DioError catch (e) {
+      print(e.response!.data);
+      CommonLoader.hideLoading();
       CommonLoader.showErrorDialog(description: e.message);
     }
   }

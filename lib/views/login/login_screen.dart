@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                             validator: loginController.numberValidator,
                             cursorColor: Colors.black,
                             controller: loginController.mobileNumber,
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                                 constraints: BoxConstraints(
                                   minHeight: 5.h,

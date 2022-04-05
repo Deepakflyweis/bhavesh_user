@@ -1,18 +1,27 @@
 import 'dart:convert';
 import 'package:we_fast/api_provider/api_client.dart';
+import 'package:we_fast/api_provider/providers/booking_endpoint.dart';
 import 'package:we_fast/api_provider/providers/goodtypes_endpoint.dart';
 import 'package:we_fast/api_provider/providers/vehicle_type_endpoint.dart';
+import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/models/country_model.dart';
 import 'package:we_fast/models/goods_model.dart';
 import 'package:we_fast/models/payment_methods_model.dart';
 import 'package:we_fast/models/vehicle_details_model.dart';
+import 'package:we_fast/services/date_formatter.dart';
+import 'package:we_fast/services/weight_converter.dart';
 
 class BookVehicleController extends GetxController
     with StateMixin<List<VehicleDetailsModel>> {
-  GlobalKey<FormState> formKey = GlobalKey();
+  GlobalKey<FormState> addNewLoadFormKey = GlobalKey();
+  GlobalKey<FormState> pickUpDetailsForBookNowFormKey = GlobalKey();
+  GlobalKey<FormState> pickUpDetailsForBookLaterFormKey = GlobalKey();
+  late bookingType bookingMethod;
   late Rx<VehicleDetailsModel> selectedVehicle;
   List<VehicleDetailsModel> allVehicles = [];
+  TextEditingController presentAddress = TextEditingController();
+  TextEditingController recieverAddress = TextEditingController();
   TextEditingController senderName = TextEditingController();
   TextEditingController senderMobile = TextEditingController(text: '+91');
   TextEditingController recieverName = TextEditingController();
@@ -21,8 +30,16 @@ class BookVehicleController extends GetxController
   TextEditingController couponCode = TextEditingController();
   TextEditingController loadWeight = TextEditingController();
   static List<CountryModel> countries = <CountryModel>[
-    CountryModel('+91', 'assets/images/india.png', 'India'),
-    CountryModel('+1', 'assets/images/usa.png', 'USA')
+    CountryModel(
+        dialingNumber: '+91',
+        img: 'assets/images/india.png',
+        name: 'India',
+        digitsInNumber: 10),
+    CountryModel(
+        dialingNumber: '+1',
+        img: 'assets/images/usa.png',
+        name: 'USA',
+        digitsInNumber: 10)
   ];
   Rx<CountryModel> selectedSenderCountry = countries.first.obs;
   selectSenderCountry(value) {
@@ -46,7 +63,7 @@ class BookVehicleController extends GetxController
     }
   }
 
-  RxString paidBy = 'Reciever'.obs;
+  Rx<senderReceiver> paidBy = senderReceiver.reciever.obs;
   selectPaidBy(value) {
     paidBy(value);
   }
@@ -57,13 +74,17 @@ class BookVehicleController extends GetxController
     selectedGoodType(value);
   }
 
-  RxString selectedWeightType = 'kg'.obs;
-  selectWeightType(value) {
+  Rx<weightUnit> selectedWeightType = weightUnit.kg.obs;
+  selectWeightType(weightUnit? value) {
+    if (value == weightUnit.kg && selectedWeightType != weightUnit.kg) {
+      loadWeight.text = WeightConverter.convertLbsToKg(lbs: loadWeight.text);
+    } else if (value == weightUnit.lb && selectedWeightType != weightUnit.lb) {
+      loadWeight.text = WeightConverter.convertKgToLbs(kg: loadWeight.text);
+    }
     selectedWeightType(value);
   }
 
   RxBool selectedExtraHandler = false.obs;
-
   selectExtraHandler(value) {
     selectedExtraHandler(value as bool);
   }
@@ -88,6 +109,8 @@ class BookVehicleController extends GetxController
     selectedPaymentMethod(value);
   }
 
+  RxBool isNextForBookLaterTapped = false.obs;
+  RxBool isPickUpDateVerified = false.obs;
   late Rx<DateTime?> pickUpDate = (null as DateTime?).obs;
   Future<void> selectPickUpDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -95,9 +118,13 @@ class BookVehicleController extends GetxController
         initialDate: DateTime.now(),
         firstDate: DateTime(2015),
         lastDate: DateTime(2050));
-    if (pickedDate != null) pickUpDate.value = pickedDate;
+    if (pickedDate != null) {
+      pickUpDate.value = pickedDate;
+      isPickUpDateVerified.value = true;
+    }
   }
 
+  RxBool isDropDateVerified = false.obs;
   late Rx<DateTime?> dropDate = (null as DateTime?).obs;
   Future<void> selectDropDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -105,7 +132,10 @@ class BookVehicleController extends GetxController
         initialDate: DateTime.now(),
         firstDate: DateTime(2015),
         lastDate: DateTime(2050));
-    if (pickedDate != null) dropDate.value = pickedDate;
+    if (pickedDate != null) {
+      dropDate.value = pickedDate;
+      isDropDateVerified.value = true;
+    }
   }
 
   callGetAllGoodsApi() {
@@ -137,6 +167,64 @@ class BookVehicleController extends GetxController
     } on Exception catch (e) {
       change(null, status: RxStatus.error(e.toString()));
     }
+  }
+
+  callBookNowApi() {
+    Client client = Client();
+    BookingEndPointProvider bookingEndPointProvider =
+        BookingEndPointProvider(client: client.init());
+    bookingEndPointProvider.bookNow(
+        vehicleTypeId: selectedVehicle.value.id,
+        pickUpAdress: presentAddress.text,
+        dropAddress: recieverAddress.text,
+        pickUpLongLat: [30, 40], //todo set pickup longLat
+        dropLongLat: [25.5, 30.5], //todo set drop longLat
+        recieverNameNumber: {
+          "name": recieverName.text,
+          "phoneNumber": recieverMobile.text
+        },
+        senderNameNumber: {
+          "name": senderName.text,
+          "phoneNumber": senderMobile.text
+        },
+        loadweight: selectedWeightType.value == weightUnit.kg
+            ? double.parse(loadWeight.text)
+            : double.parse(
+                WeightConverter.convertLbsToKg(lbs: loadWeight.text)),
+        notes: aditionalNotes.text,
+        goodsId: selectedGoodType.value!.id,
+        labourNeeded: selectedExtraHandler.value,
+        paidBy: paidBy.value);
+  }
+
+  callBookLaterApi() {
+    Client client = Client();
+    BookingEndPointProvider bookingEndPointProvider =
+        BookingEndPointProvider(client: client.init());
+    bookingEndPointProvider.bookLater(
+        vehicleTypeId: selectedVehicle.value.id,
+        pickUpAdress: presentAddress.text,
+        dropAddress: recieverAddress.text,
+        pickUpLongLat: [30, 40], //todo set pickup longLat
+        dropLongLat: [25.5, 30.5], //todo set drop longLat
+        recieverNameNumber: {
+          "name": recieverName.text,
+          "phoneNumber": recieverMobile.text
+        },
+        senderNameNumber: {
+          "name": senderName.text,
+          "phoneNumber": senderMobile.text
+        },
+        loadweight: selectedWeightType.value == weightUnit.kg
+            ? double.parse(loadWeight.text)
+            : double.parse(
+                WeightConverter.convertLbsToKg(lbs: loadWeight.text)),
+        notes: aditionalNotes.text,
+        goodsId: selectedGoodType.value!.id,
+        labourNeeded: selectedExtraHandler.value,
+        paidBy: paidBy.value,
+        pickUpDate: pickUpDate.value!,
+        dropDate: dropDate.value!);
   }
 
   @override

@@ -1,4 +1,12 @@
 class CountryModel {
-  String img, dialingNumber, name;
-  CountryModel(this.dialingNumber, this.img, this.name);
+  String img;
+  String dialingNumber;
+  String name;
+  int digitsInNumber;
+  CountryModel({
+    required this.img,
+    required this.dialingNumber,
+    required this.name,
+    required this.digitsInNumber,
+  });
 }
