@@ -109,7 +109,7 @@ class BookingEndPointProvider {
           DateFormatter.formatToShashedDateWithoutTime(dropDate) //"2022-03-31"
     };
     try {
-      Response r = await client.post("/booking", data: data);
+      Response r = await client.post("/booking/schedule", data: data);
       CommonLoader.hideLoading();
       if (r.statusCode == 200) {
         CommonLoader.showSuccessDialog(description: "Booked");
@@ -118,6 +118,22 @@ class BookingEndPointProvider {
       }
     } on DioError catch (e) {
       print(e.response!.data);
+      CommonLoader.hideLoading();
+      CommonLoader.showErrorDialog(description: e.message);
+    }
+  }
+
+  cancelBooking(String bookingId) async {
+    CommonLoader.showLoading();
+    try {
+      Response r = await client.post("/booking/$bookingId/cancel");
+      CommonLoader.hideLoading();
+      if (r.statusCode == 200) {
+        CommonLoader.showSuccessDialog(description: "Booking Cancelled");
+      } else {
+        CommonLoader.showErrorDialog(description: r.data["error"]);
+      }
+    } on DioError catch (e) {
       CommonLoader.hideLoading();
       CommonLoader.showErrorDialog(description: e.message);
     }

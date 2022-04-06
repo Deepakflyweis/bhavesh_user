@@ -90,17 +90,32 @@ class AccountScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset(
-                          'assets/icons/whatsapp.png',
-                          height: 6.h,
+                        InkWell(
+                          onTap: () {
+                            accountController.shareToWhatsApp();
+                          },
+                          child: Image.asset(
+                            'assets/icons/whatsapp.png',
+                            height: 6.h,
+                          ),
                         ),
-                        Image.asset(
-                          'assets/icons/facebook.png',
-                          height: 8.h,
+                        InkWell(
+                          onTap: () {
+                            accountController.shareToFacebook();
+                          },
+                          child: Image.asset(
+                            'assets/icons/facebook.png',
+                            height: 8.h,
+                          ),
                         ),
-                        Image.asset(
-                          'assets/icons/twitter.png',
-                          height: 6.h,
+                        InkWell(
+                          onTap: () {
+                            accountController.shareToTwitter();
+                          },
+                          child: Image.asset(
+                            'assets/icons/twitter.png',
+                            height: 6.h,
+                          ),
                         )
                       ],
                     ),

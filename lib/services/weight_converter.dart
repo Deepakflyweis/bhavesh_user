@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class WeightConverter {
   static String convertLbsToKg({required String lbs}) {
     return (0.453592 * double.parse(lbs)).toStringAsFixed(2);

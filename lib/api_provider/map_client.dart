@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 
 class MapClient {
-  static const String googleMapApiKey =
-      "AIzaSyDj1xhHpQ-eM8Kx0WkcS4kR7Zq3UKRGhbg";
   Dio init() {
     Dio _dio = Dio();
     _dio.interceptors.add(ApiInterceptors());

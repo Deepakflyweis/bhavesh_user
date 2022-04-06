@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter_share_me/flutter_share_me.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:we_fast/api_provider/api_client.dart';
@@ -8,9 +11,43 @@ class AccountController extends GetxController with StateMixin<UserModel> {
   Rx<bool> notificationsSetting = true.obs;
   GetStorage box = GetStorage();
   late UserModel user;
+
+  static const String shareLink = "www.playstore.com"; //todo change share link
+  final FlutterShareMe flutterShareMe = FlutterShareMe();
+
   changeNotificationSetting(value) {
     box.write("notificationSetting", value);
     notificationsSetting(value);
+  }
+
+  shareToWhatsApp() async {
+    try {
+      String? r = await flutterShareMe.shareToWhatsApp(msg: shareLink);
+      print(r!);
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+  }
+
+  shareToFacebook() async {
+    try {
+      String? r = await flutterShareMe.shareToFacebook(
+          url: shareLink,
+          msg:
+              'Check Out This Amazing App'); //todo register app on facebook to use share to facebook and setup in manifest
+      print(r!);
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+  }
+
+  shareToTwitter() async {
+    try {
+      String? r = await flutterShareMe.shareToTwitter(
+          url: shareLink, msg: 'Check Out This Amazing App');
+    } on Exception catch (e) {
+      log(e.toString());
+    }
   }
 
   callGetUserApi() {
