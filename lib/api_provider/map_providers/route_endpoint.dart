@@ -1,1 +1,3 @@
-class Name {}
+class Name {
+  
+}

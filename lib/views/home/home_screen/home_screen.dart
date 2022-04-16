@@ -15,6 +15,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:we_fast/widgets/error_widget.dart';
 import 'package:we_fast/widgets/vehicle_details_dialog_content.dart';
 
+import '../../../widgets/searched_location_tile.dart';
+
 class HomeScreen extends GetView<BookVehicleController> {
   HomeScreen({
     Key? key,
@@ -77,75 +79,159 @@ class HomeScreen extends GetView<BookVehicleController> {
                       mapController.googleMapController.complete(con);
                     },
                   ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        onTap: () {
-                          //Get.to(() => SearchPickUpLocation());
-                        },
-                        controller: mapController.pickUpController,
-                        textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 15),
-                            hintText: 'Pick Up Location',
-                            fillColor: Colors.white,
-                            filled: true,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                              size: 17.sp,
-                            ),
-                            suffixIcon: Icon(
-                              Icons.cancel_outlined,
-                              color: Colors.grey,
-                              size: 17.sp,
-                            ),
-                            constraints: BoxConstraints(maxHeight: 4.h),
-                            border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.primaryColor),
-                              borderRadius: BorderRadius.circular(50),
-                            )),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          onTap: () {
+                            //Get.to(() => SearchPickUpLocation());
+                          },
+                          onChanged: (val) async {
+                            await mapController.callGetPlacesApi(
+                                text: mapController.searchPickUp.text,
+                                placeList:
+                                    mapController.searchedPickupLocations);
+                          },
+                          onEditingComplete: () async {
+                            await mapController.callGetPlacesApi(
+                                text: mapController.searchPickUp.text,
+                                placeList:
+                                    mapController.searchedPickupLocations);
+                            //mapController.searchedPickupLocations.refresh();
+                          },
+                          controller: mapController.searchPickUp,
+                          textCapitalization: TextCapitalization.words,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 15),
+                              hintText: 'Pick Up Location',
+                              fillColor: Colors.white,
+                              filled: true,
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.grey,
+                                size: 17.sp,
+                              ),
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  mapController.searchPickUp.clear();
+                                  mapController.searchedPickupLocations.clear();
+                                },
+                                child: Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.grey,
+                                  size: 17.sp,
+                                ),
+                              ),
+                              constraints: BoxConstraints(maxHeight: 4.h),
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.primaryColor),
+                                borderRadius: BorderRadius.circular(50),
+                              )),
+                        ),
                       ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: mapController.dropController,
-                        textCapitalization: TextCapitalization.words,
-                        onTap: () {
-                          // Get.to(() => SearchDropLocation());
-                        },
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 15),
-                            hintStyle: TextStyle(fontSize: 13.sp),
-                            hintText: 'Drop Location',
-                            fillColor: Colors.white,
-                            filled: true,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                              size: 17.sp,
+                      Obx(() => Visibility(
+                          visible:
+                              mapController.searchedDropLocations.isEmpty &&
+                                  mapController.searchedPickupLocations.isEmpty,
+                          child: Spacer())),
+                      Obx(() => Visibility(
+                          visible: mapController
+                                  .searchedDropLocations.isNotEmpty &&
+                              mapController.searchedPickupLocations.isNotEmpty,
+                          child: SizedBox(
+                            height: 1.h,
+                          ))),
+                      Obx(
+                        () => Visibility(
+                          visible:
+                              mapController.searchedPickupLocations.isNotEmpty,
+                          child: Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  mapController.searchedPickupLocations.length,
+                              itemBuilder: ((context, index) =>
+                                  SearchedLocationTile(
+                                      title: mapController
+                                          .searchedPickupLocations[index]
+                                          .formattedAddress,
+                                      onTap: () {})),
                             ),
-                            suffixIcon: Icon(
-                              Icons.cancel_outlined,
-                              color: Colors.grey,
-                              size: 17.sp,
-                            ),
-                            constraints: BoxConstraints(maxHeight: 4.h),
-                            border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.primaryColor),
-                              borderRadius: BorderRadius.circular(50),
-                            )),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                      Obx(
+                        () => Visibility(
+                          visible:
+                              mapController.searchedDropLocations.isNotEmpty,
+                          child: Expanded(
+                            child: ListView.builder(
+                              reverse: true,
+                              itemCount:
+                                  mapController.searchedDropLocations.length,
+                              itemBuilder: ((context, index) =>
+                                  SearchedLocationTile(
+                                    title: mapController
+                                        .searchedDropLocations[index]
+                                        .formattedAddress,
+                                    onTap: () {},
+                                  )),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: mapController.searchDrop,
+                          textCapitalization: TextCapitalization.words,
+                          onTap: () {
+                            // Get.to(() => SearchDropLocation());
+                          },
+                          onChanged: (val) async {
+                            await mapController.callGetPlacesApi(
+                                text: mapController.searchDrop.text,
+                                placeList: mapController.searchedDropLocations);
+                          },
+                          onEditingComplete: () async {
+                            await mapController.callGetPlacesApi(
+                                text: mapController.searchDrop.text,
+                                placeList: mapController.searchedDropLocations);
+                            //mapController.searchedPickupLocations.refresh();
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 15),
+                              hintStyle: TextStyle(fontSize: 13.sp),
+                              hintText: 'Drop Location',
+                              fillColor: Colors.white,
+                              filled: true,
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.grey,
+                                size: 17.sp,
+                              ),
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  mapController.searchDrop.clear();
+                                  mapController.searchedDropLocations.clear();
+                                },
+                                child: Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.grey,
+                                  size: 17.sp,
+                                ),
+                              ),
+                              constraints: BoxConstraints(maxHeight: 4.h),
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.primaryColor),
+                                borderRadius: BorderRadius.circular(50),
+                              )),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

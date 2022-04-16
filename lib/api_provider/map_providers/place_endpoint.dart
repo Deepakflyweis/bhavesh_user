@@ -11,16 +11,17 @@ class PlaceEndPointProvider {
     required this.client,
   });
 
-  getPlace(String searchText) async {
+  Future<List<PlacesModel>> getPlace(String searchText) async {
     try {
       Response r = await client
           .get("/place/textsearch/json?query=$searchText&key=$googleMapApiKey");
-      if (r.statusCode == 200) {
-        return placesModelFromJson(jsonEncode(r.data));
+      if (r.statusCode == 200) {        
+        return placesModelFromJson(jsonEncode(r.data["results"]));
       } else {
         return Future.error(r.data["status"]);
       }
     } on DioError catch (e) {
+      print(e.response!.data);
       return Future.error(e.message);
     }
   }
