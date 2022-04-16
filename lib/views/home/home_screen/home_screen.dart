@@ -72,12 +72,15 @@ class HomeScreen extends GetView<BookVehicleController> {
             Expanded(
               child: Stack(
                 children: [
-                  GoogleMap(
-                    zoomControlsEnabled: false,
-                    initialCameraPosition: mapController.kGooglePlex,
-                    onMapCreated: (con) {
-                      mapController.googleMapController.complete(con);
-                    },
+                  Obx(
+                    () => GoogleMap(
+                      markers: Set<Marker>.of(mapController.allMarkers),
+                      zoomControlsEnabled: false,
+                      initialCameraPosition: mapController.kGooglePlex,
+                      onMapCreated: (con) {
+                        mapController.googleMapController.complete(con);
+                      },
+                    ),
                   ),
                   Column(
                     children: [
@@ -92,12 +95,20 @@ class HomeScreen extends GetView<BookVehicleController> {
                                 text: mapController.searchPickUp.text,
                                 placeList:
                                     mapController.searchedPickupLocations);
+                            if (mapController
+                                .searchedPickupLocations.isNotEmpty) {
+                              mapController.showPickupList(true);
+                            }
                           },
                           onEditingComplete: () async {
                             await mapController.callGetPlacesApi(
                                 text: mapController.searchPickUp.text,
                                 placeList:
                                     mapController.searchedPickupLocations);
+                            if (mapController
+                                .searchedPickupLocations.isNotEmpty) {
+                              mapController.showPickupList(true);
+                            }
                             //mapController.searchedPickupLocations.refresh();
                           },
                           controller: mapController.searchPickUp,
@@ -116,6 +127,10 @@ class HomeScreen extends GetView<BookVehicleController> {
                                 onTap: () {
                                   mapController.searchPickUp.clear();
                                   mapController.searchedPickupLocations.clear();
+                                  mapController.allMarkers
+                                      .remove(mapController.pickUpMarker);
+                                  mapController.allMarkers.refresh();
+                                  mapController.showPickupList(false);
                                 },
                                 child: Icon(
                                   Icons.cancel_outlined,
@@ -132,51 +147,64 @@ class HomeScreen extends GetView<BookVehicleController> {
                         ),
                       ),
                       Obx(() => Visibility(
-                          visible:
-                              mapController.searchedDropLocations.isEmpty &&
-                                  mapController.searchedPickupLocations.isEmpty,
+                          visible: mapController.showDropList.value == false &&
+                              mapController.showPickupList.value == false,
                           child: Spacer())),
+                      Obx(
+                        () => Visibility(
+                          visible: mapController.showPickupList.value,
+                          child: Expanded(
+                            child: Container(
+                              color: Colors.white,
+                              child: ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: mapController
+                                    .searchedPickupLocations.length,
+                                itemBuilder: ((context, index) =>
+                                    SearchedLocationTile(
+                                        title: mapController
+                                            .searchedPickupLocations[index]
+                                            .formattedAddress,
+                                        onTap: () async {
+                                          mapController.markPickUpLocation(
+                                              mapController
+                                                      .searchedPickupLocations[
+                                                  index]);
+                                        })),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       Obx(() => Visibility(
-                          visible: mapController
-                                  .searchedDropLocations.isNotEmpty &&
-                              mapController.searchedPickupLocations.isNotEmpty,
+                          visible: mapController.showDropList.value &&
+                              mapController.showPickupList.value,
                           child: SizedBox(
                             height: 1.h,
                           ))),
                       Obx(
                         () => Visibility(
-                          visible:
-                              mapController.searchedPickupLocations.isNotEmpty,
+                          visible: mapController.showDropList.value,
                           child: Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  mapController.searchedPickupLocations.length,
-                              itemBuilder: ((context, index) =>
-                                  SearchedLocationTile(
+                            child: Container(
+                              color: Colors.white,
+                              child: ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                reverse: true,
+                                itemCount:
+                                    mapController.searchedDropLocations.length,
+                                itemBuilder: ((context, index) =>
+                                    SearchedLocationTile(
                                       title: mapController
-                                          .searchedPickupLocations[index]
+                                          .searchedDropLocations[index]
                                           .formattedAddress,
-                                      onTap: () {})),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Obx(
-                        () => Visibility(
-                          visible:
-                              mapController.searchedDropLocations.isNotEmpty,
-                          child: Expanded(
-                            child: ListView.builder(
-                              reverse: true,
-                              itemCount:
-                                  mapController.searchedDropLocations.length,
-                              itemBuilder: ((context, index) =>
-                                  SearchedLocationTile(
-                                    title: mapController
-                                        .searchedDropLocations[index]
-                                        .formattedAddress,
-                                    onTap: () {},
-                                  )),
+                                      onTap: () async {
+                                        mapController.markDropLocation(
+                                            mapController
+                                                .searchedDropLocations[index]);
+                                      },
+                                    )),
+                              ),
                             ),
                           ),
                         ),
@@ -193,11 +221,19 @@ class HomeScreen extends GetView<BookVehicleController> {
                             await mapController.callGetPlacesApi(
                                 text: mapController.searchDrop.text,
                                 placeList: mapController.searchedDropLocations);
+                            if (mapController
+                                .searchedDropLocations.isNotEmpty) {
+                              mapController.showDropList(true);
+                            }
                           },
                           onEditingComplete: () async {
                             await mapController.callGetPlacesApi(
                                 text: mapController.searchDrop.text,
                                 placeList: mapController.searchedDropLocations);
+                            if (mapController
+                                .searchedDropLocations.isNotEmpty) {
+                              mapController.showDropList(true);
+                            }
                             //mapController.searchedPickupLocations.refresh();
                           },
                           decoration: InputDecoration(
@@ -215,6 +251,10 @@ class HomeScreen extends GetView<BookVehicleController> {
                                 onTap: () {
                                   mapController.searchDrop.clear();
                                   mapController.searchedDropLocations.clear();
+                                  mapController.allMarkers
+                                      .remove(mapController.dropMarker);
+                                  mapController.allMarkers.refresh();
+                                  mapController.showDropList(false);
                                 },
                                 child: Icon(
                                   Icons.cancel_outlined,
@@ -241,63 +281,67 @@ class HomeScreen extends GetView<BookVehicleController> {
               child: controller.obx(
                 (state) => Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state!.length,
-                    itemBuilder: ((context, index) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          child: Obx(
-                            () => Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      8), //index 0 is truck
-                                  color: controller.selectedVehicle.value ==
-                                          state[index]
-                                      ? AppColors.primaryColor.withOpacity(0.25)
-                                      : Colors.transparent),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 6),
-                                child: InkWell(
-                                  onTap: () {
-                                    Get.defaultDialog(
-                                        title: state[index].name,
-                                        content: VehicleDetailsDialogContent(
-                                          vehicleDetailsModel: state[index],
-                                          onTap: () {
-                                            controller
-                                                .selectedVehicle(state[index]);
-                                            controller.selectedVehicle
-                                                .refresh();
-                                            Get.back();
-                                          },
-                                        ));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        state[index].name,
-                                        style: TextStyle(fontSize: 13.sp),
-                                      ),
-                                      Image.network(
-                                        state[index].image,
-                                        height: 4.h,
-                                        errorBuilder:
-                                            (context, Object, StackTrace) =>
-                                                Center(
-                                                    child: Icon(
-                                          Icons.image,
-                                        )),
-                                      )
-                                    ],
+                  child: Container(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state!.length,
+                      itemBuilder: ((context, index) => Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 2.w),
+                            child: Obx(
+                              () => Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        8), //index 0 is truck
+                                    color: controller.selectedVehicle.value ==
+                                            state[index]
+                                        ? AppColors.primaryColor
+                                            .withOpacity(0.25)
+                                        : Colors.transparent),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 6),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.defaultDialog(
+                                          title: state[index].name,
+                                          content: VehicleDetailsDialogContent(
+                                            vehicleDetailsModel: state[index],
+                                            onTap: () {
+                                              controller.selectedVehicle(
+                                                  state[index]);
+                                              controller.selectedVehicle
+                                                  .refresh();
+                                              Get.back();
+                                            },
+                                          ));
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          state[index].name,
+                                          style: TextStyle(fontSize: 13.sp),
+                                        ),
+                                        Image.network(
+                                          state[index].image,
+                                          height: 4.h,
+                                          errorBuilder:
+                                              (context, Object, StackTrace) =>
+                                                  Center(
+                                                      child: Icon(
+                                            Icons.image,
+                                          )),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        )),
+                          )),
+                    ),
                   ),
                 ),
               ),

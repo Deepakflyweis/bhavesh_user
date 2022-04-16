@@ -18,10 +18,10 @@ class PlacesModel {
     required this.iconBackgroundColor,
     required this.iconMaskBaseUri,
     required this.name,
-    required this.photos,
+    this.photos,
     required this.placeId,
     required this.reference,
-    required this.types,
+    this.types,
   });
 
   String formattedAddress;
@@ -33,7 +33,7 @@ class PlacesModel {
   List<Photo>? photos;
   String placeId;
   String reference;
-  List<String> types;
+  List<String>? types;
 
   factory PlacesModel.fromJson(Map<String, dynamic> json) => PlacesModel(
         formattedAddress: json["formatted_address"],
@@ -47,7 +47,7 @@ class PlacesModel {
             : List<Photo>.from(json["photos"].map((x) => Photo.fromJson(x))),
         placeId: json["place_id"],
         reference: json["reference"],
-        types: List<String>.from(json["types"].map((x) => x)),
+        types:json["types"]==null?null :List<String>.from(json["types"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,7 +60,7 @@ class PlacesModel {
         "photos": List<dynamic>.from(photos!.map((x) => x.toJson())),
         "place_id": placeId,
         "reference": reference,
-        "types": List<dynamic>.from(types.map((x) => x)),
+        "types": List<dynamic>.from(types!.map((x) => x)),
       };
 }
 
