@@ -33,151 +33,157 @@ class AccountScreen extends StatelessWidget {
               width: 70.w,
             ),
           ),
-          Spacer(),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/logo.svg',
-                    height: 7.h,
-                  ),
-                  Text(
-                    '${AppName.appName}',
-                    style: TextStyle(color: Colors.black, fontSize: 15.sp),
-                  ),
-                  accountController.obx(
-                      (state) => Row(
-                            children: [
-                              Text(
-                                state!.name,
-                                style: TextStyle(fontSize: 12.sp),
-                              ),
-                              Spacer(),
-                              Text(
-                                state.phoneNumber,
-                                style: TextStyle(
-                                    fontSize: 10.sp, color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                      onError: (err) => CustomErrorWidget(
-                            err: err,
-                          )),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Get.to(() => ManageProfileScreen());
-                      },
-                      child: Text(
-                        'Edit Profile',
-                        style: TextStyle(color: AppColors.primaryColor),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/logo.svg',
+                        height: 7.h,
                       ),
-                    ),
-                  ),
-                  Row(
-                    //todo setup Invite
-                    children: [Text('Invite friends '), Icon(Icons.share)],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            accountController.shareToWhatsApp();
+                      Text(
+                        '${AppName.appName}',
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
+                      ),
+                      accountController.obx(
+                          (state) => Row(
+                                children: [
+                                  Text(
+                                    state!.name,
+                                    style: TextStyle(fontSize: 12.sp),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    state.phoneNumber,
+                                    style: TextStyle(
+                                        fontSize: 10.sp, color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                          onError: (err) => CustomErrorWidget(
+                                err: err,
+                              )),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Get.to(() => ManageProfileScreen());
                           },
-                          child: Image.asset(
-                            'assets/icons/whatsapp.png',
-                            height: 6.h,
+                          child: Text(
+                            'Edit Profile',
+                            style: TextStyle(color: AppColors.primaryColor),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            accountController.shareToFacebook();
-                          },
-                          child: Image.asset(
-                            'assets/icons/facebook.png',
-                            height: 8.h,
-                          ),
+                      ),
+                      Row(
+                        //todo setup Invite
+                        children: [Text('Invite friends '), Icon(Icons.share)],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                accountController.shareToWhatsApp();
+                              },
+                              child: Image.asset(
+                                'assets/icons/whatsapp.png',
+                                height: 6.h,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                accountController.shareToFacebook();
+                              },
+                              child: Image.asset(
+                                'assets/icons/facebook.png',
+                                height: 8.h,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                accountController.shareToTwitter();
+                              },
+                              child: Image.asset(
+                                'assets/icons/twitter.png',
+                                height: 6.h,
+                              ),
+                            )
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            accountController.shareToTwitter();
-                          },
-                          child: Image.asset(
-                            'assets/icons/twitter.png',
-                            height: 6.h,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  BorderButton(title: 'xxxxxxxx', onTap: () {}),
-                  Text(
-                    'Copy 🔗',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                  Obx(() => SwitchListTile(
-                        activeColor: AppColors.primaryColor,
-                        secondary: Image.asset(
-                          'assets/icons/notifications_settings.png',
+                      ),
+                      BorderButton(title: 'xxxxxxxx', onTap: () {}),
+                      Text(
+                        'Copy 🔗',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                      Obx(() => SwitchListTile(
+                            activeColor: AppColors.primaryColor,
+                            secondary: Image.asset(
+                              'assets/icons/notifications_settings.png',
+                              height: 5.h,
+                            ),
+                            value: accountController.notificationsSetting.value,
+                            onChanged:
+                                accountController.changeNotificationSetting,
+                            title: Text(
+                              'Notifications',
+                              style: TextStyle(fontSize: 12.sp),
+                            ),
+                          )),
+                      ListTile(
+                        onTap: () {
+                          Get.to(() => HelpAndSupport());
+                        },
+                        leading: Image.asset(
+                          'assets/icons/contact_us.png',
                           height: 5.h,
                         ),
-                        value: accountController.notificationsSetting.value,
-                        onChanged: accountController.changeNotificationSetting,
-                        title: Text(
-                          'Notifications',
-                          style: TextStyle(fontSize: 12.sp),
+                        title: Text.rich(TextSpan(children: [
+                          TextSpan(text: 'Contact Us'),
+                          TextSpan(
+                              text: '\nFor any queries or help',
+                              style: TextStyle(color: Colors.grey))
+                        ])),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          GetStorage box = GetStorage();
+                          box.erase();
+                          Get.offAll(() => LoginScreen());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/icons/logout_icon.png',
+                              height: 4.h,
+                            ),
+                            Text(
+                              ' LOGOUT',
+                              style: TextStyle(
+                                  color: AppColors.primaryColor,
+                                  fontSize: 12.sp),
+                            )
+                          ],
                         ),
-                      )),
-                  ListTile(
-                    onTap: () {
-                      Get.to(() => HelpAndSupport());
-                    },
-                    leading: Image.asset(
-                      'assets/icons/contact_us.png',
-                      height: 5.h,
-                    ),
-                    title: Text.rich(TextSpan(children: [
-                      TextSpan(text: 'Contact Us'),
-                      TextSpan(
-                          text: '\nFor any queries or help',
-                          style: TextStyle(color: Colors.grey))
-                    ])),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      GetStorage box = GetStorage();
-                      box.erase();
-                      Get.offAll(() => LoginScreen());
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/logout_icon.png',
-                          height: 4.h,
-                        ),
-                        Text(
-                          ' LOGOUT',
-                          style: TextStyle(
-                              color: AppColors.primaryColor, fontSize: 12.sp),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
           )

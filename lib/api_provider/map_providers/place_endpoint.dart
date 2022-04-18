@@ -6,14 +6,14 @@ import 'package:we_fast/constants/env.dart';
 import 'package:we_fast/models/places_model.dart';
 
 class PlaceEndPointProvider {
-  Dio client;
+  Dio mapClient;
   PlaceEndPointProvider({
-    required this.client,
+    required this.mapClient,
   });
 
   Future<List<PlacesModel>> getPlace(String searchText) async {
     try {
-      Response r = await client
+      Response r = await mapClient
           .get("/place/textsearch/json?query=$searchText&key=$googleMapApiKey");
       if (r.statusCode == 200) {        
         return placesModelFromJson(jsonEncode(r.data["results"]));

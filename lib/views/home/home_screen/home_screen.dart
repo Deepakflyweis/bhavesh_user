@@ -74,7 +74,9 @@ class HomeScreen extends GetView<BookVehicleController> {
                 children: [
                   Obx(
                     () => GoogleMap(
+                      mapType: MapType.normal,
                       markers: Set<Marker>.of(mapController.allMarkers),
+                      polylines: Set<Polyline>.of(mapController.polylines),
                       zoomControlsEnabled: false,
                       initialCameraPosition: mapController.kGooglePlex,
                       onMapCreated: (con) {
@@ -125,12 +127,7 @@ class HomeScreen extends GetView<BookVehicleController> {
                               ),
                               suffixIcon: InkWell(
                                 onTap: () {
-                                  mapController.searchPickUp.clear();
-                                  mapController.searchedPickupLocations.clear();
-                                  mapController.allMarkers
-                                      .remove(mapController.pickUpMarker);
-                                  mapController.allMarkers.refresh();
-                                  mapController.showPickupList(false);
+                                  mapController.clearPickUpLocation();
                                 },
                                 child: Icon(
                                   Icons.cancel_outlined,
@@ -170,6 +167,7 @@ class HomeScreen extends GetView<BookVehicleController> {
                                               mapController
                                                       .searchedPickupLocations[
                                                   index]);
+                                          FocusScope.of(context).unfocus();
                                         })),
                               ),
                             ),
@@ -202,6 +200,7 @@ class HomeScreen extends GetView<BookVehicleController> {
                                         mapController.markDropLocation(
                                             mapController
                                                 .searchedDropLocations[index]);
+                                        FocusScope.of(context).unfocus();
                                       },
                                     )),
                               ),
@@ -249,12 +248,7 @@ class HomeScreen extends GetView<BookVehicleController> {
                               ),
                               suffixIcon: InkWell(
                                 onTap: () {
-                                  mapController.searchDrop.clear();
-                                  mapController.searchedDropLocations.clear();
-                                  mapController.allMarkers
-                                      .remove(mapController.dropMarker);
-                                  mapController.allMarkers.refresh();
-                                  mapController.showDropList(false);
+                                  mapController.clearDropLocation();
                                 },
                                 child: Icon(
                                   Icons.cancel_outlined,
@@ -271,7 +265,36 @@ class HomeScreen extends GetView<BookVehicleController> {
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  Obx(() {
+                    if (mapController.selectedRoute.value != null) {
+                      return Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.sp),
+                              color: Colors.white),
+                          child: Padding(
+                            padding: EdgeInsets.all(4.sp),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text("Distance: " +
+                                    mapController.selectedRoute.value!.legs
+                                        .first.distance.text),
+                                Text("Duration: " +
+                                    mapController.selectedRoute.value!.legs
+                                        .first.duration.text)
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  })
                 ],
               ),
             ),
