@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,7 +7,6 @@ import 'package:we_fast/api_provider/map_client.dart';
 import 'package:we_fast/api_provider/map_providers/directions_endpoint.dart';
 import 'package:we_fast/api_provider/map_providers/place_endpoint.dart';
 import 'package:flutter/material.dart';
-import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/models/directions_model.dart';
 import 'package:we_fast/models/places_model.dart';
 
@@ -112,7 +110,7 @@ class MapController extends GetxController {
                       value.routes.first.bounds.southwest.lng),
                   northeast: LatLng(value.routes.first.bounds.northeast.lat,
                       value.routes.first.bounds.northeast.lng)),
-              10.sp));
+              20.sp));
         }
         //just in case in future you had to implement multiple route
         /* for (int i = 0; i < value.routes.length; i++) {

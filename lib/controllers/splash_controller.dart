@@ -21,8 +21,7 @@ class SplashController extends GetxController {
     try {
       String? token = box.read("token");
       if (token != null) {
-        Client.token = token;
-        log(token);
+        Client.token = token;        
         Get.off(() => NavBarScreen());
       } else {
         Get.off(() => LoginScreen());
