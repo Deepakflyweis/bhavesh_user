@@ -15,7 +15,7 @@ class DirectionsEndPointProvider {
       required String destinationPlaceId}) async {
     try {
       Response r = await mapClient.get(
-          "https://maps.googleapis.com/maps/api/directions/json?destination=place_id:$destinationPlaceId&origin=place_id:$originPlaceId&key=$googleMapApiKey");
+          "/directions/json?destination=place_id:$destinationPlaceId&origin=place_id:$originPlaceId&key=$googleMapApiKey");
       if (r.statusCode == 200) {
         return directionsModelFromJson(jsonEncode(r.data));
       } else {
