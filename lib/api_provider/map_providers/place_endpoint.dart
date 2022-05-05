@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:we_fast/api_provider/map_client.dart';
 import 'package:we_fast/constants/env.dart';
 import 'package:we_fast/models/places_model.dart';
 

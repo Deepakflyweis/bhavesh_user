@@ -161,7 +161,7 @@ class HomeScreen extends GetView<BookVehicleController> {
                                     SearchedLocationTile(
                                         title: mapController
                                             .searchedPickupLocations[index]
-                                            .formattedAddress,
+                                            .name,
                                         onTap: () async {
                                           mapController.markPickUpLocation(
                                               mapController
@@ -194,8 +194,7 @@ class HomeScreen extends GetView<BookVehicleController> {
                                 itemBuilder: ((context, index) =>
                                     SearchedLocationTile(
                                       title: mapController
-                                          .searchedDropLocations[index]
-                                          .formattedAddress,
+                                          .searchedDropLocations[index].name,
                                       onTap: () async {
                                         mapController.markDropLocation(
                                             mapController

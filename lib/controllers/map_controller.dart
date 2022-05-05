@@ -45,7 +45,7 @@ class MapController extends GetxController {
   markDropLocation(PlacesModel placesModel) async {
     showDropList(false);
     dropPlace = placesModel;
-    searchDrop.text = dropPlace!.formattedAddress;
+    searchDrop.text = dropPlace!.name;
     var latLong = LatLng(
         placesModel.geometry.location.lat, placesModel.geometry.location.lng);
     dropMarker = Marker(
@@ -67,7 +67,7 @@ class MapController extends GetxController {
   markPickUpLocation(PlacesModel placesModel) async {
     showPickupList(false);
     pickUpPlace = placesModel;
-    searchPickUp.text = pickUpPlace!.formattedAddress;
+    searchPickUp.text = pickUpPlace!.name;
     var latLong = LatLng(
         placesModel.geometry.location.lat, placesModel.geometry.location.lng);
     pickUpMarker = Marker(
