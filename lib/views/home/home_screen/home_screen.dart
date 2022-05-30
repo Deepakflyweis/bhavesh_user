@@ -372,8 +372,15 @@ class HomeScreen extends GetView<BookVehicleController> {
               children: [
                 InkWell(
                   onTap: () {
-                    bookVehicleController.bookingMethod = bookingType.bookNow;
-                    Get.to(() => PickUpDetailsForBookNow());
+                    if (mapController.pickUpPlace != null &&
+                        mapController.dropPlace != null) {
+                      bookVehicleController.bookingMethod = bookingType.bookNow;
+                      bookVehicleController.presentAddress.text =
+                          mapController.pickUpPlace!.formattedAddress;
+                      bookVehicleController.recieverAddress.text = 
+                        mapController.dropPlace!.formattedAddress;
+                      Get.to(() => PickUpDetailsForBookNow());
+                    }
                   },
                   child: Container(
                     height: 5.h,
@@ -390,8 +397,16 @@ class HomeScreen extends GetView<BookVehicleController> {
                 ),
                 InkWell(
                   onTap: () {
-                    bookVehicleController.bookingMethod = bookingType.bookLater;
-                    Get.to(() => PickUpDetailsForBookLater());
+                    if (mapController.pickUpPlace != null &&
+                        mapController.dropPlace != null) {
+                      bookVehicleController.bookingMethod =
+                          bookingType.bookLater;
+                          bookVehicleController.presentAddress.text =
+                          mapController.pickUpPlace!.formattedAddress;
+                      bookVehicleController.recieverAddress.text =
+                          mapController.dropPlace!.formattedAddress;
+                      Get.to(() => PickUpDetailsForBookLater());
+                    }
                   },
                   child: Container(
                     height: 5.h,

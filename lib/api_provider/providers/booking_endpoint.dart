@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/models/booking_model.dart';
 import 'package:we_fast/services/common_loader/common_loader.dart';
@@ -136,6 +137,20 @@ class BookingEndPointProvider {
     } on DioError catch (e) {
       CommonLoader.hideLoading();
       CommonLoader.showErrorDialog(description: e.message);
+    }
+  }
+
+  Future<num> getEstimatePricing(
+      {required LatLng origin, required LatLng dest}) async {
+    try {
+      var data = {
+        "origin": {"lng": origin.longitude, "lat": origin.latitude},
+        "destination": {"lng": origin.longitude, "lat": dest.latitude}
+      };
+      Response r = await client.get("/booking/estimated-price");
+      return r.data["data"]["price"];
+    } on Exception catch (e) {
+      return Future.error(e.toString());
     }
   }
 }

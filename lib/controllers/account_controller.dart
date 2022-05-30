@@ -50,7 +50,7 @@ class AccountController extends GetxController with StateMixin<UserModel> {
     }
   }
 
-  callGetUserApi() {
+  callGetUserApi () {
     Client client = Client();
     UserEndPointProvider userEndPointProvider =
         UserEndPointProvider(client: client.init());

@@ -9,8 +9,8 @@ class BookingListController extends GetxController
     try {
       Client client = Client();
       BookingEndPointProvider bookingEndPointProvider =
-          BookingEndPointProvider(client: client.init());
-
+          BookingEndPointProvider(client: client.init());          
+          
       bookingEndPointProvider.getAllBookings().then((value) {
         if (value.isNotEmpty) {
           change(value, status: RxStatus.success());

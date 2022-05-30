@@ -3,6 +3,7 @@
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/controllers/book_vehicle_controller.dart';
+import 'package:we_fast/controllers/map_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/views/home/home_screen/book_now_screen/add_new_load_form.dart';
 import 'package:we_fast/widgets/buttons/rectangular_gradient_button.dart';
@@ -12,7 +13,7 @@ import 'package:we_fast/widgets/start_stop_widget.dart';
 
 class PickUpDetailsForBookNow extends StatelessWidget {
   PickUpDetailsForBookNow({Key? key}) : super(key: key);
-  final BookVehicleController bookVehicleController = Get.find();
+  final BookVehicleController bookVehicleController = Get.find();  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

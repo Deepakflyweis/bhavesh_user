@@ -22,7 +22,9 @@ class MapController extends GetxController {
   late Marker dropMarker;
   Rx<Routes?> selectedRoute = (null as Routes?).obs;
   PlacesModel? pickUpPlace;
+  LatLng? pickupLocation;
   PlacesModel? dropPlace;
+  LatLng? dropLocation;
   RxBool showPickupList = false.obs;
   RxBool showDropList = false.obs;
   final CameraPosition kGooglePlex = CameraPosition(
@@ -48,6 +50,7 @@ class MapController extends GetxController {
     searchDrop.text = dropPlace!.name;
     var latLong = LatLng(
         placesModel.geometry.location.lat, placesModel.geometry.location.lng);
+    dropLocation = latLong;
     dropMarker = Marker(
       markerId: MarkerId("drop"),
       infoWindow: InfoWindow(title: "Drop Off"),
@@ -70,6 +73,7 @@ class MapController extends GetxController {
     searchPickUp.text = pickUpPlace!.name;
     var latLong = LatLng(
         placesModel.geometry.location.lat, placesModel.geometry.location.lng);
+    pickupLocation = latLong;
     pickUpMarker = Marker(
         markerId: MarkerId("pickUp"),
         position: latLong,

@@ -4,6 +4,7 @@ import 'package:we_fast/api_provider/providers/booking_endpoint.dart';
 import 'package:we_fast/api_provider/providers/goodtypes_endpoint.dart';
 import 'package:we_fast/api_provider/providers/vehicle_type_endpoint.dart';
 import 'package:we_fast/constants/enums.dart';
+import 'package:we_fast/controllers/map_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/models/country_model.dart';
 import 'package:we_fast/models/goods_model.dart';
@@ -29,6 +30,20 @@ class BookVehicleController extends GetxController
   TextEditingController aditionalNotes = TextEditingController();
   TextEditingController couponCode = TextEditingController();
   TextEditingController loadWeight = TextEditingController();
+  String estimatePrice = "";
+
+  callGetEstimatePriceApi() async {
+    BookingEndPointProvider bookingEndPointProvider =
+        BookingEndPointProvider(client: Client().init());
+    bookingEndPointProvider
+        .getEstimatePricing(
+            origin: Get.find<MapController>().pickupLocation!,
+            dest: Get.find<MapController>().dropLocation!)
+        .then((value) {
+      estimatePrice = value.toString();
+    });
+  }
+
   static List<CountryModel> countries = <CountryModel>[
     CountryModel(
         dialingNumber: '+91',
@@ -177,8 +192,14 @@ class BookVehicleController extends GetxController
         vehicleTypeId: selectedVehicle.value.id,
         pickUpAdress: presentAddress.text,
         dropAddress: recieverAddress.text,
-        pickUpLongLat: [30, 40], //todo set pickup longLat
-        dropLongLat: [25.5, 30.5], //todo set drop longLat
+        pickUpLongLat: [
+          Get.find<MapController>().pickupLocation!.longitude,
+          Get.find<MapController>().pickupLocation!.latitude
+        ],
+        dropLongLat: [
+          Get.find<MapController>().dropLocation!.longitude,
+          Get.find<MapController>().dropLocation!.latitude
+        ],
         recieverNameNumber: {
           "name": recieverName.text,
           "phoneNumber": recieverMobile.text
@@ -205,8 +226,14 @@ class BookVehicleController extends GetxController
         vehicleTypeId: selectedVehicle.value.id,
         pickUpAdress: presentAddress.text,
         dropAddress: recieverAddress.text,
-        pickUpLongLat: [30, 40], //todo set pickup longLat
-        dropLongLat: [25.5, 30.5], //todo set drop longLat
+         pickUpLongLat: [
+          Get.find<MapController>().pickupLocation!.longitude,
+          Get.find<MapController>().pickupLocation!.latitude
+        ],
+        dropLongLat: [
+          Get.find<MapController>().dropLocation!.longitude,
+          Get.find<MapController>().dropLocation!.latitude
+        ],
         recieverNameNumber: {
           "name": recieverName.text,
           "phoneNumber": recieverMobile.text
