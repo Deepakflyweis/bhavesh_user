@@ -87,14 +87,9 @@ class AddNewLoadForm extends StatelessWidget {
                                         validator: (val) {
                                           if (val!.length !=
                                               bookVehicleController
-                                                      .selectedSenderCountry
-                                                      .value
-                                                      .dialingNumber
-                                                      .length +
-                                                  bookVehicleController
-                                                      .selectedSenderCountry
-                                                      .value
-                                                      .digitsInNumber) {
+                                                  .selectedSenderCountry
+                                                  .value
+                                                  .digitsInNumber) {
                                             return "Enter Mobile Number";
                                           }
                                         },
@@ -174,14 +169,9 @@ class AddNewLoadForm extends StatelessWidget {
                                         validator: (val) {
                                           if (val!.length !=
                                               bookVehicleController
-                                                      .selectedRecieverCountry
-                                                      .value
-                                                      .dialingNumber
-                                                      .length +
-                                                  bookVehicleController
-                                                      .selectedRecieverCountry
-                                                      .value
-                                                      .digitsInNumber) {
+                                                  .selectedRecieverCountry
+                                                  .value
+                                                  .digitsInNumber) {
                                             return "Enter Mobile Number";
                                           }
                                         },
@@ -364,37 +354,19 @@ class AddNewLoadForm extends StatelessWidget {
                                       padding: const EdgeInsets.all(6.0),
                                       child: Column(
                                         children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Sub-Total',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 11.sp),
-                                              ),
-                                              Text(
-                                                '${RupeeSymbol.rupeeSymbol}xxxxxx',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 11.sp),
-                                              )
-                                            ],
-                                          ),
                                           DottedLine(width: 80.w),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Sub-Total',
+                                                'Total',
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 11.sp),
                                               ),
                                               Text(
-                                                '${RupeeSymbol.rupeeSymbol}xxxxxx',
+                                                '${RupeeSymbol.rupeeSymbol} ${bookVehicleController.estimatePrice}',
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 11.sp),

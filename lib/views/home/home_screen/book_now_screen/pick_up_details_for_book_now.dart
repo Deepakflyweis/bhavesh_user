@@ -13,7 +13,7 @@ import 'package:we_fast/widgets/start_stop_widget.dart';
 
 class PickUpDetailsForBookNow extends StatelessWidget {
   PickUpDetailsForBookNow({Key? key}) : super(key: key);
-  final BookVehicleController bookVehicleController = Get.find();  
+  final BookVehicleController bookVehicleController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -129,7 +129,8 @@ class PickUpDetailsForBookNow extends StatelessWidget {
                           wheels: bookVehicleController
                               .selectedVehicle.value.wheels
                               .toString(),
-                          amount: "2500".toString()),
+                          amount:
+                              bookVehicleController.estimatePrice.toString()),
                       Divider(
                         height: 1.h,
                         color: Colors.grey,

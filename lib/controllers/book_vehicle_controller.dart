@@ -24,9 +24,9 @@ class BookVehicleController extends GetxController
   TextEditingController presentAddress = TextEditingController();
   TextEditingController recieverAddress = TextEditingController();
   TextEditingController senderName = TextEditingController();
-  TextEditingController senderMobile = TextEditingController(text: '+91');
+  TextEditingController senderMobile = TextEditingController();
   TextEditingController recieverName = TextEditingController();
-  TextEditingController recieverMobile = TextEditingController(text: '+91');
+  TextEditingController recieverMobile = TextEditingController();
   TextEditingController aditionalNotes = TextEditingController();
   TextEditingController couponCode = TextEditingController();
   TextEditingController loadWeight = TextEditingController();
@@ -38,7 +38,8 @@ class BookVehicleController extends GetxController
     bookingEndPointProvider
         .getEstimatePricing(
             origin: Get.find<MapController>().pickupLocation!,
-            dest: Get.find<MapController>().dropLocation!)
+            dest: Get.find<MapController>().dropLocation!,
+            vehicleTypeId: selectedVehicle.value.id)
         .then((value) {
       estimatePrice = value.toString();
     });
@@ -226,7 +227,7 @@ class BookVehicleController extends GetxController
         vehicleTypeId: selectedVehicle.value.id,
         pickUpAdress: presentAddress.text,
         dropAddress: recieverAddress.text,
-         pickUpLongLat: [
+        pickUpLongLat: [
           Get.find<MapController>().pickupLocation!.longitude,
           Get.find<MapController>().pickupLocation!.latitude
         ],

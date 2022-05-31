@@ -54,6 +54,7 @@ class BookingModel {
   DateTime createdAt;
   DateTime updatedAt;
   Driver driver;
+  
   Vehicle vehicle;
   double amount;
 

@@ -55,7 +55,7 @@ class BookingEndPointProvider {
       "notes": notes, //"ede3ds3wdewdw",
       "goodsType": goodsId, //"62303b05b04d89f6e46e1460",
       "labourNeeded": labourNeeded, //true,
-      "paidBy": paidBy.name //"receiver"
+      "paidBy": paidBy.name.toLowerCase() //"receiver"
     };
     try {
       Response r = await client.post("/booking", data: data);
@@ -103,7 +103,7 @@ class BookingEndPointProvider {
       "notes": notes, //"ede3ds3wdewdw",
       "goodsType": goodsId, //"62303b05b04d89f6e46e1460",
       "labourNeeded": labourNeeded, //true,
-      "paidBy": paidBy.name, //"receiver"
+      "paidBy": paidBy.name.toLowerCase(), //"receiver"
       "pickupDate": DateFormatter.formatToShashedDateWithoutTime(
           pickUpDate), //"2022-03-25",
       "dropDate":
@@ -141,11 +141,14 @@ class BookingEndPointProvider {
   }
 
   Future<num> getEstimatePricing(
-      {required LatLng origin, required LatLng dest}) async {
+      {required LatLng origin,
+      required LatLng dest,
+      required String vehicleTypeId}) async {
     try {
       var data = {
         "origin": {"lng": origin.longitude, "lat": origin.latitude},
-        "destination": {"lng": origin.longitude, "lat": dest.latitude}
+        "destination": {"lng": origin.longitude, "lat": dest.latitude},
+        "vehicleType":vehicleTypeId
       };
       Response r = await client.get("/booking/estimated-price");
       return r.data["data"]["price"];

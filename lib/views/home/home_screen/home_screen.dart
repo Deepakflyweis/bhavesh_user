@@ -377,8 +377,9 @@ class HomeScreen extends GetView<BookVehicleController> {
                       bookVehicleController.bookingMethod = bookingType.bookNow;
                       bookVehicleController.presentAddress.text =
                           mapController.pickUpPlace!.formattedAddress;
-                      bookVehicleController.recieverAddress.text = 
-                        mapController.dropPlace!.formattedAddress;
+                      bookVehicleController.recieverAddress.text =
+                          mapController.dropPlace!.formattedAddress;
+                      bookVehicleController.callGetEstimatePriceApi();
                       Get.to(() => PickUpDetailsForBookNow());
                     }
                   },
@@ -401,10 +402,11 @@ class HomeScreen extends GetView<BookVehicleController> {
                         mapController.dropPlace != null) {
                       bookVehicleController.bookingMethod =
                           bookingType.bookLater;
-                          bookVehicleController.presentAddress.text =
+                      bookVehicleController.presentAddress.text =
                           mapController.pickUpPlace!.formattedAddress;
                       bookVehicleController.recieverAddress.text =
                           mapController.dropPlace!.formattedAddress;
+                      bookVehicleController.callGetEstimatePriceApi();
                       Get.to(() => PickUpDetailsForBookLater());
                     }
                   },
