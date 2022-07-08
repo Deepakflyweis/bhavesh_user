@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:we_fast/api_provider/api_client.dart';
 import 'package:we_fast/api_provider/providers/booking_endpoint.dart';
 import 'package:we_fast/api_provider/providers/goodtypes_endpoint.dart';
@@ -7,6 +8,7 @@ import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/controllers/map_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/models/country_model.dart';
+import 'package:we_fast/models/estimated_price_all.dart';
 import 'package:we_fast/models/goods_model.dart';
 import 'package:we_fast/models/payment_methods_model.dart';
 import 'package:we_fast/models/vehicle_details_model.dart';
@@ -21,6 +23,7 @@ class BookVehicleController extends GetxController
   late bookingType bookingMethod;
   late Rx<VehicleDetailsModel> selectedVehicle;
   List<VehicleDetailsModel> allVehicles = [];
+  List<EstimatedAllModel> estPrice = [];
   TextEditingController presentAddress = TextEditingController();
   TextEditingController recieverAddress = TextEditingController();
   TextEditingController senderName = TextEditingController();
@@ -30,7 +33,7 @@ class BookVehicleController extends GetxController
   TextEditingController aditionalNotes = TextEditingController();
   TextEditingController couponCode = TextEditingController();
   TextEditingController loadWeight = TextEditingController();
-  String estimatePrice = "";
+  RxString estimatePrice = "".obs;
 
   callGetEstimatePriceApi() async {
     BookingEndPointProvider bookingEndPointProvider =
@@ -41,8 +44,37 @@ class BookVehicleController extends GetxController
             dest: Get.find<MapController>().dropLocation!,
             vehicleTypeId: selectedVehicle.value.id)
         .then((value) {
-      estimatePrice = value.toString();
+      estimatePrice.value = value.toString();
+      log(" estimatePrice $estimatePrice");
     });
+  }
+
+  showPriceApi() {
+    Client client = Client();
+    VehicleTypeEndPointProvider pointProvider =
+        VehicleTypeEndPointProvider(client: client.init());
+    pointProvider.getPriceAll();
+  }
+
+  callGetAllVehicleApi() {
+    Client client = Client();
+    VehicleTypeEndPointProvider vehicleTypeEndPointProvider =
+        VehicleTypeEndPointProvider(client: client.init());
+    try {
+      vehicleTypeEndPointProvider.getVehicleType().then((value) {
+        if (value.isNotEmpty) {
+          allVehicles.addAll(value);
+          selectedVehicle = value[0].obs;
+          change(allVehicles, status: RxStatus.success());
+        } else {
+          change(null, status: RxStatus.empty());
+        }
+      }, onError: (err) {
+        change(null, status: RxStatus.error(err));
+      });
+    } on Exception catch (e) {
+      change(null, status: RxStatus.error(e.toString()));
+    }
   }
 
   static List<CountryModel> countries = <CountryModel>[
@@ -82,6 +114,11 @@ class BookVehicleController extends GetxController
   Rx<senderReceiver> paidBy = senderReceiver.reciever.obs;
   selectPaidBy(value) {
     paidBy(value);
+  }
+
+  Rx<payMode> paidM = payMode.cash.obs;
+  selectMode(value) {
+    paidM(value);
   }
 
   RxList<GoodsModel> goodsList = <GoodsModel>[].obs;
@@ -164,27 +201,6 @@ class BookVehicleController extends GetxController
     });
   }
 
-  callGetAllVehicleApi() {
-    Client client = Client();
-    VehicleTypeEndPointProvider vehicleTypeEndPointProvider =
-        VehicleTypeEndPointProvider(client: client.init());
-    try {
-      vehicleTypeEndPointProvider.getVehicleType().then((value) {
-        if (value.isNotEmpty) {
-          allVehicles.addAll(value);
-          selectedVehicle = value[0].obs;
-          change(allVehicles, status: RxStatus.success());
-        } else {
-          change(null, status: RxStatus.empty());
-        }
-      }, onError: (err) {
-        change(null, status: RxStatus.error(err));
-      });
-    } on Exception catch (e) {
-      change(null, status: RxStatus.error(e.toString()));
-    }
-  }
-
   callBookNowApi() {
     Client client = Client();
     BookingEndPointProvider bookingEndPointProvider =
@@ -216,7 +232,8 @@ class BookVehicleController extends GetxController
         notes: aditionalNotes.text,
         goodsId: selectedGoodType.value!.id,
         labourNeeded: selectedExtraHandler.value,
-        paidBy: paidBy.value);
+        paidBy: paidBy.value,
+        payM: paidM.value);
   }
 
   callBookLaterApi() {

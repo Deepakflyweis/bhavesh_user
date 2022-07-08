@@ -129,8 +129,9 @@ class PickUpDetailsForBookNow extends StatelessWidget {
                           wheels: bookVehicleController
                               .selectedVehicle.value.wheels
                               .toString(),
-                          amount:
-                              bookVehicleController.estimatePrice.toString()),
+                          // amount:
+                          //     bookVehicleController.estimatePrice.toString()
+                              ),
                       Divider(
                         height: 1.h,
                         color: Colors.grey,
@@ -170,7 +171,7 @@ class PickUpDetailsForBookNow extends StatelessWidget {
                                   value: senderReceiver.reciever,
                                   child: Text('Reciever'),
                                 ),
-                                const DropdownMenuItem<senderReceiver>(
+                                 const DropdownMenuItem<senderReceiver>(
                                   value: senderReceiver.sender,
                                   child: Text('Sender'),
                                 )
@@ -179,6 +180,55 @@ class PickUpDetailsForBookNow extends StatelessWidget {
                           ),
                         ),
                       ),
+                       Divider(
+                        height: 2.h,
+                        color: Colors.white,
+                      ),
+                       Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'PAYMENT MODE',
+                          style: TextStyle(fontSize: 12.sp),
+                        ),
+                      ),
+                      Divider(
+                        height: 3.h,
+                        color: Colors.grey,
+                      ),
+                      Container(
+                        height: 5.h,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: Colors.grey.shade400)),
+                        child: Obx(
+                          () => DropdownButtonHideUnderline(
+                            child: DropdownButton<payMode>(
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_outlined,
+                                color: Colors.grey,
+                                size: 15.sp,
+                              ),
+                              isExpanded: true,
+                              style: TextStyle(
+                                  color: Colors.grey, fontSize: 11.sp),
+                              value: bookVehicleController.paidM.value,
+                              onChanged: bookVehicleController.selectMode,
+                              items: [
+                                const DropdownMenuItem<payMode>(
+                                  value: payMode.cash,
+                                  child: Text('Cash'),
+                                ),
+                                 const DropdownMenuItem<payMode>(
+                                  value: payMode.wallet,
+                                  child: Text('Wallet'),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),                     
+
                       Divider(
                         height: 3.h,
                         color: Colors.grey,

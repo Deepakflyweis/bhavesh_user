@@ -45,8 +45,8 @@ class AccountScreen extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/icons/logo.svg',
+                       Image.asset(
+              'assets/icons/logo.png',
                         height: 7.h,
                       ),
                       Text(

@@ -39,9 +39,9 @@ class OtpScreen extends StatelessWidget {
                       const Spacer(),
                       Hero(
                         tag: 'logo',
-                        child: SvgPicture.asset(
-                          'assets/icons/logo.svg',
-                          semanticsLabel: 'Logo',
+                        child: Image.asset(
+                          'assets/icons/logo.png',
+                          // semanticsLabel: 'Logo',
                           height: 10.h,
                         ),
                       ),

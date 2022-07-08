@@ -5,7 +5,7 @@ class Client {
   Dio init() {
     Dio _dio = Dio();
     _dio.interceptors.add(ApiInterceptors());
-    _dio.options.baseUrl = "https://we-fast-flyweis.herokuapp.com";
+    _dio.options.baseUrl = "http://mern.online:5005";
     return _dio;
   }
 }

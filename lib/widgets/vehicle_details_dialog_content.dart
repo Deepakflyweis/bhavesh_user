@@ -2,7 +2,7 @@ import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/models/vehicle_details_model.dart';
 
-class VehicleDetailsDialogContent extends StatelessWidget {
+class VehicleDetailsDialogContent extends GetView {
   const VehicleDetailsDialogContent({
     Key? key,
     required this.vehicleDetailsModel,

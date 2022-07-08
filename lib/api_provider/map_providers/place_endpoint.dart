@@ -19,7 +19,7 @@ class PlaceEndPointProvider {
         return Future.error(r.data["status"]);
       }
     } on DioError catch (e) {
-      print(e.response!.data);
+      // print(e.response!.data);
       return Future.error(e.message);
     }
   }

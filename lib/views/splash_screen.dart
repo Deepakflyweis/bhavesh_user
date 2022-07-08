@@ -17,10 +17,10 @@ class SplashScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Hero(
-            tag: 'logo',
-            child: SvgPicture.asset(
-              'assets/icons/logo.svg',
-              semanticsLabel: 'Logo',
+            tag: 'logo',  
+            child: Image.asset(
+              'assets/icons/logo.png',
+              // semanticsLabel: 'Logo',
               height: 10.h,
             ),
           ),

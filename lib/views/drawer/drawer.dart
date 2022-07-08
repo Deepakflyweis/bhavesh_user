@@ -32,9 +32,9 @@ class SideDrawer extends StatelessWidget {
               Icons.clear,
               color: AppColors.primaryColor,
             )),
-        title: SvgPicture.asset(
-          'assets/icons/logo.svg',
-          height: 30,
+        title: Image.asset(
+          'assets/icons/logo.png',
+          // semanticsLabel: 'Logo',
         ),
       ),
       body: SingleChildScrollView(

@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+ 
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/controllers/bottom_navbar_controller.dart';
-import 'package:get/get.dart';
+ 
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/nav_bar_icons_icons.dart';
 import 'package:we_fast/views/home/account/account_screen.dart';

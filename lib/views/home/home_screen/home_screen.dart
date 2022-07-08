@@ -1,15 +1,16 @@
+import 'dart:developer';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/controllers/banners_controller.dart';
 import 'package:we_fast/controllers/book_vehicle_controller.dart';
+import 'package:we_fast/controllers/estimated_all_controller.dart';
 import 'package:we_fast/controllers/map_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_fast/views/home/home_screen/book_later_screen/pick_up_details_for_book_later.dart';
 import 'package:we_fast/views/home/home_screen/book_now_screen/pick_up_details_for_book_now.dart';
-import 'package:we_fast/views/home/home_screen/search_location/search_drop_location.dart';
-import 'package:we_fast/views/home/home_screen/search_location/search_pickup_location.dart';
 import 'package:we_fast/widgets/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:we_fast/widgets/error_widget.dart';
@@ -25,6 +26,10 @@ class HomeScreen extends GetView<BookVehicleController> {
   final BookVehicleController bookVehicleController =
       Get.put(BookVehicleController(), permanent: true);
   BannersController _bannersController = Get.put(BannersController());
+  EstimatedAllController _controller = Get.put(EstimatedAllController());
+  // var isLoading = false;
+  RxBool isLoading = false.obs;
+
   final List<String> banners = const [
     'assets/images/banner_1.png',
     'assets/images/banner_2.png',
@@ -38,8 +43,8 @@ class HomeScreen extends GetView<BookVehicleController> {
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          titleWidget: SvgPicture.asset(
-            'assets/icons/logo.svg',
+          titleWidget: Image.asset(
+            'assets/icons/logo.png',
             height: 30,
           ),
         ),
@@ -210,12 +215,20 @@ class HomeScreen extends GetView<BookVehicleController> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
+                          onSubmitted: (value) {
+                            log("on submitted");
+                            EstimatedAllController()
+                                .callGetEstimatedPriceAllApi();
+                            isLoading = true.obs;
+                            print("isLoading is $isLoading");
+                          },
                           controller: mapController.searchDrop,
                           textCapitalization: TextCapitalization.words,
                           onTap: () {
                             // Get.to(() => SearchDropLocation());
                           },
                           onChanged: (val) async {
+                            log("on changed");
                             await mapController.callGetPlacesApi(
                                 text: mapController.searchDrop.text,
                                 placeList: mapController.searchedDropLocations);
@@ -223,8 +236,13 @@ class HomeScreen extends GetView<BookVehicleController> {
                                 .searchedDropLocations.isNotEmpty) {
                               mapController.showDropList(true);
                             }
+
+                            ///for price
+                            // EstimatedAllController()
+                            //     .callGetEstimatedPriceAllApi();
                           },
                           onEditingComplete: () async {
+                            log("on complete");
                             await mapController.callGetPlacesApi(
                                 text: mapController.searchDrop.text,
                                 placeList: mapController.searchedDropLocations);
@@ -232,6 +250,12 @@ class HomeScreen extends GetView<BookVehicleController> {
                                 .searchedDropLocations.isNotEmpty) {
                               mapController.showDropList(true);
                             }
+
+                            // _controller.isValue = true.obs;
+
+                            // EstimatedAllController()
+                            //     .callGetEstimatedPriceAllApi();
+
                             //mapController.searchedPickupLocations.refresh();
                           },
                           decoration: InputDecoration(
@@ -297,77 +321,109 @@ class HomeScreen extends GetView<BookVehicleController> {
                 ],
               ),
             ),
-            Container(
-              height: 10.h,
-              color: AppColors.backgroundColor,
-              child: controller.obx(
-                (state) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state!.length,
-                      itemBuilder: ((context, index) => Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2.w),
-                            child: Obx(
-                              () => Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        8), //index 0 is truck
-                                    color: controller.selectedVehicle.value ==
-                                            state[index]
-                                        ? AppColors.primaryColor
-                                            .withOpacity(0.25)
-                                        : Colors.transparent),
-                                child: Padding(
+            // Obx(() =>
+            // ( _controller.isValue.value)
+            //     ? 
+                Container(
+                    height: 15.h,
+                    color: AppColors.backgroundColor,
+                    child: controller.obx(
+                      (state) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state!.length,
+                            itemBuilder: ((context, index) => Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(horizontal: 6),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Get.defaultDialog(
-                                          title: state[index].name,
-                                          content: VehicleDetailsDialogContent(
-                                            vehicleDetailsModel: state[index],
+                                      EdgeInsets.symmetric(horizontal: 2.w),
+                                  child: Obx(() => Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                                8), //index 0 is truck
+                                            color: controller.selectedVehicle
+                                                        .value ==
+                                                    state[index]
+                                                ? AppColors.primaryColor
+                                                    .withOpacity(0.25)
+                                                : Colors.transparent),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 6),
+                                          child: InkWell(
                                             onTap: () {
-                                              controller.selectedVehicle(
-                                                  state[index]);
-                                              controller.selectedVehicle
-                                                  .refresh();
-                                              Get.back();
+                                              Get.defaultDialog(
+                                                  title: state[index].name,
+                                                  content:
+                                                      VehicleDetailsDialogContent(                                                         
+                                                     vehicleDetailsModel:
+                                                     state[index],
+                                                    onTap: () {
+                                                      controller
+                                                          .selectedVehicle(
+                                                              state[index]);
+                                                      controller.selectedVehicle
+                                                          .refresh();
+                                                      Get.back();
+                                                    },
+                                                  ));
                                             },
-                                          ));
-                                    },
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          state[index].name,
-                                          style: TextStyle(fontSize: 13.sp),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  state[index].name,
+                                                  style: TextStyle(
+                                                      fontSize: 13.sp),
+                                                ),
+                                                Image.network(
+                                                  state[index].image,
+                                                  height: 4.h,
+                                                  errorBuilder: (context,
+                                                          Object, StackTrace) =>
+                                                      Center(
+                                                          child: Icon(
+                                                    Icons.image,
+                                                  )),
+                                                ),
+
+                                                
+                                                Obx(
+                                                  () => 
+                                                  // (_controller
+                                                  //         .isValue.value)
+                                                      EstimatedAllController()
+                                                              .isValue
+                                                              .value
+                                                      ? Text(
+                                                          // EstimatedAllController()
+                                                          //     .estimatedPrice
+                                                          //     .toString(),
+                                                          state[index].baseFare.toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 13.sp),
+                                                        )
+                                                      : Text(
+                                                          state[index]
+                                                              .pricePerKm
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 13.sp),
+                                                        ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        Image.network(
-                                          state[index].image,
-                                          height: 4.h,
-                                          errorBuilder:
-                                              (context, Object, StackTrace) =>
-                                                  Center(
-                                                      child: Icon(
-                                            Icons.image,
-                                          )),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                                      )),
+                                )),
+                          ),
+                        ),
+                      ),
+                    )),
+                // ),
             Row(
               children: [
                 InkWell(
@@ -386,14 +442,14 @@ class HomeScreen extends GetView<BookVehicleController> {
                   child: Container(
                     height: 5.h,
                     width: 50.w,
-                    decoration: BoxDecoration(
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
                       gradient: AppColors.buttonGradientPurple,
                     ),
-                    child: Center(
-                        child: Text(
+                    child: const Text(
                       'Book Now',
                       style: TextStyle(color: Colors.white),
-                    )),
+                    ),
                   ),
                 ),
                 InkWell(

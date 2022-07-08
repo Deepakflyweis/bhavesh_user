@@ -128,7 +128,7 @@ class PickUpDetailsForBookLater extends StatelessWidget {
                           wheels: bookVehicleController
                               .selectedVehicle.value.wheels
                               .toString(),
-                          amount: bookVehicleController.estimatePrice
+                          // amount: bookVehicleController.estimatePrice
                           ),
                       Divider(
                         height: 1.h,

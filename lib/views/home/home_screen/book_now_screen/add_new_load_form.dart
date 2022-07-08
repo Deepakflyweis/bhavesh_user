@@ -1,16 +1,37 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
+import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/controllers/book_vehicle_controller.dart';
 import 'package:we_fast/essentails.dart';
 import 'package:we_fast/models/goods_model.dart';
 import 'package:we_fast/services/weight_converter.dart';
+import 'package:we_fast/views/home/home_screen/book_now_screen/contacts_screen.dart';
+import 'package:we_fast/views/home/navbar_screen.dart';
 import 'package:we_fast/widgets/buttons/rectangular_gradient_button.dart';
 import 'package:we_fast/widgets/dotted_line.dart';
 import 'package:we_fast/widgets/drawer_appbar.dart';
 
-class AddNewLoadForm extends StatelessWidget {
+import 'package:permission_handler/permission_handler.dart';
+
+class AddNewLoadForm extends StatefulWidget {
   AddNewLoadForm({Key? key}) : super(key: key);
+
+  @override
+  State<AddNewLoadForm> createState() => _AddNewLoadFormState();
+}
+
+class _AddNewLoadFormState extends State<AddNewLoadForm> {
   final BookVehicleController bookVehicleController = Get.find();
+
+  // FlutterContactPicker _contactPicker = FlutterContactPicker;
+  PhoneContact? _phoneContact;
+  EmailContact? _emailContact;
+  // late Contact _contact;
+  String? _contact;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -49,6 +70,7 @@ class AddNewLoadForm extends StatelessWidget {
                             TextFormField(
                               style: TextStyle(fontSize: 12.sp),
                               controller: bookVehicleController.senderName,
+                              autofillHints: [AutofillHints.name],
                               validator: (val) {
                                 if (val == "") {
                                   return "Enter Senders's Name";
@@ -56,11 +78,50 @@ class AddNewLoadForm extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                   hintText: "Sender's name",
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Image.asset(
-                                      'assets/icons/contact_book_icon.png',
-                                      height: 30,
+                                  suffixIcon: GestureDetector(
+                                    onTap: () async {
+                                      final FullContact contact =
+                                          (await FlutterContactPicker
+                                              .pickFullContact());
+                                      print(contact);
+                                      setState(() {
+                                        _contact = contact.name.toString();
+                                        // _contact = contact.phones.toString();
+                                        bookVehicleController.senderName.text =
+                                            (contact.name?.firstName
+                                                .toString())!;
+                                        bookVehicleController
+                                                .senderMobile.text =
+                                            (contact.phones.first.number
+                                                .toString());
+                                      });
+
+                                      // List<FullContact> contact =
+                                      //     await _contactPicker
+                                      //         .pickFullContacts();
+                                      // setState(() {
+                                      //   _contact = contact;
+                                      //   bookVehicleController.senderName.text =
+                                      //       _contact.fullName;
+                                      //   bookVehicleController.senderMobile.text = _contact.phoneNumber.number
+                                      // });
+
+                                      // print('sender');
+                                      // // showContacts();
+                                      // final PermissionStatus permissionStatus =
+                                      //     await _getPermission();
+                                      // log("permission ${permissionStatus.isGranted}");
+                                      // if (permissionStatus ==
+                                      //     PermissionStatus.granted) {
+                                      //   Get.to(() => ContactScreen());
+                                      // }
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Image.asset(
+                                        'assets/icons/contact_book_icon.png',
+                                        height: 30,
+                                      ),
                                     ),
                                   )),
                             ),
@@ -138,11 +199,42 @@ class AddNewLoadForm extends StatelessWidget {
                               controller: bookVehicleController.recieverName,
                               decoration: InputDecoration(
                                   hintText: "Reciever's name",
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Image.asset(
-                                      'assets/icons/contact_book_icon.png',
-                                      height: 30,
+                                  suffixIcon: InkWell(
+                                    onTap: () async {
+
+                                      final FullContact contact =
+                                          (await FlutterContactPicker
+                                              .pickFullContact());
+                                      print(contact);
+                                      setState(() {
+                                        _contact = contact.name.toString();
+                                        // _contact = contact.phones.toString();
+                                        bookVehicleController.recieverName.text =
+                                            (contact.name?.firstName
+                                                .toString())!;
+                                        bookVehicleController
+                                                .recieverMobile.text =
+                                            (contact.phones.first.number
+                                                .toString());
+                                      });
+
+
+                                      // log('reciever');
+                                      // // showContacts();
+
+                                      // final PermissionStatus permissionStatus =
+                                      //     await _getPermission();
+                                      // if (permissionStatus ==
+                                      //     PermissionStatus.granted) {
+                                      //   Get.to(() => ContactScreen());
+                                      // }
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Image.asset(
+                                        'assets/icons/contact_book_icon.png',
+                                        height: 30,
+                                      ),
                                     ),
                                   )),
                             ),
@@ -411,5 +503,44 @@ class AddNewLoadForm extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showContacts() async {
+    final PermissionStatus permissionStatus = await _getPermission();
+    if (permissionStatus == PermissionStatus.granted) {
+      // Get.to(() => ContactScreen());
+    }
+    // else {
+    // showDialog(
+    //         context: context,
+    //         builder: (BuildContext context) => CupertinoAlertDialog(
+    //               title: Text('Permissions error'),
+    //               content: Text('Please enable contacts access '
+    //                   'permission in system settings'),
+    //               actions: <Widget>[
+    //                 CupertinoDialogAction(
+    //                   child: Text('OK'),
+    //                   onPressed: () => Navigator.of(context).pop(),
+    //                 )
+    //               ],
+    //             )
+    //             );
+
+    // }
+  }
+
+  ///check contacts permission
+  Future<PermissionStatus> _getPermission() async {
+    final PermissionStatus permission = await Permission.contacts.status;
+    // if (permission != PermissionStatus.granted &&
+    //     permission != PermissionStatus.denied) {
+    //   log("get permission");
+
+    // } else {
+    //   return permission;
+    // }
+    final Map<Permission, PermissionStatus> permissionStatus =
+        await [Permission.contacts].request();
+    return permissionStatus[Permission.contacts] ?? PermissionStatus.granted;
   }
 }

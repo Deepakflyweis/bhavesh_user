@@ -1,7 +1,7 @@
 import 'package:we_fast/constants/constants.dart';
 import 'package:we_fast/controllers/payment_controller.dart';
 import 'package:we_fast/essentails.dart';
-import 'package:we_fast/views/home/payments_screen/add_money.dart';
+ 
 import 'package:we_fast/widgets/appbar.dart';
 import 'package:we_fast/widgets/buttons/border_button.dart';
 import 'package:we_fast/widgets/transactions_tile.dart';

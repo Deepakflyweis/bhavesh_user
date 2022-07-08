@@ -1,11 +1,14 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as g;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:we_fast/constants/enums.dart';
 import 'package:we_fast/models/booking_model.dart';
 import 'package:we_fast/services/common_loader/common_loader.dart';
 import 'package:we_fast/services/date_formatter.dart';
+import 'package:we_fast/views/home/navbar_screen.dart';
 
 class BookingEndPointProvider {
   Dio client;
@@ -39,7 +42,8 @@ class BookingEndPointProvider {
       required String notes,
       required String goodsId,
       required bool labourNeeded,
-      required senderReceiver paidBy}) async {
+      required senderReceiver paidBy,
+      required payMode payM}) async {
     CommonLoader.showLoading();
     var data = {
       "vehicleType": vehicleTypeId,
@@ -55,18 +59,21 @@ class BookingEndPointProvider {
       "notes": notes, //"ede3ds3wdewdw",
       "goodsType": goodsId, //"62303b05b04d89f6e46e1460",
       "labourNeeded": labourNeeded, //true,
-      "paidBy": paidBy.name.toLowerCase() //"receiver"
+      "paidBy": paidBy.name.toLowerCase(), //"receiver"
+      "paymentMode": payM.name.toLowerCase(),  
     };
     try {
       Response r = await client.post("/booking", data: data);
       CommonLoader.hideLoading();
       if (r.statusCode == 200) {
         CommonLoader.showSuccessDialog(description: "Booked");
+        g.Get.to(() => NavBarScreen());
+        
       } else {
         CommonLoader.showErrorDialog(description: r.data["error"]);
       }
     } on DioError catch (e) {
-      print(e.response!.data);
+      // print(e.response!.data);
       CommonLoader.hideLoading();
       CommonLoader.showErrorDialog(description: e.message);
     }
@@ -114,6 +121,7 @@ class BookingEndPointProvider {
       CommonLoader.hideLoading();
       if (r.statusCode == 200) {
         CommonLoader.showSuccessDialog(description: "Booked");
+        
       } else {
         CommonLoader.showErrorDialog(description: r.data["error"]);
       }
@@ -148,11 +156,12 @@ class BookingEndPointProvider {
       var data = {
         "origin": {"lng": origin.longitude, "lat": origin.latitude},
         "destination": {"lng": origin.longitude, "lat": dest.latitude},
-        "vehicleType":vehicleTypeId
+        "vehicleType": vehicleTypeId
       };
-      Response r = await client.get("/booking/estimated-price");
+      Response r = await client.post("/booking/estimated-price", data: data);
       return r.data["data"]["price"];
     } on Exception catch (e) {
+      log("err $e");
       return Future.error(e.toString());
     }
   }
