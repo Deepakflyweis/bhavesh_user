@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\tw__like_action.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\8e505fafaa2ed2da918dfb5112ed5e00\\transformed\\jetified-tweet-ui-3.1.1\\res\\drawable-v21\\tw__like_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\abc_list_divider_material.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\5ca2b65bf513d24c6e632d217cccf3ad\\transformed\\appcompat-1.0.0\\res\\drawable-v21\\abc_list_divider_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\15d9b6e391d82486261a36acb56abe8d\\transformed\\core-1.6.0\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\abc_dialog_material_background.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\5ca2b65bf513d24c6e632d217cccf3ad\\transformed\\appcompat-1.0.0\\res\\drawable-v21\\abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\5ca2b65bf513d24c6e632d217cccf3ad\\transformed\\appcompat-1.0.0\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\5ca2b65bf513d24c6e632d217cccf3ad\\transformed\\appcompat-1.0.0\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\flutter_share_me\\intermediates\\res\\merged\\release\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\5ca2b65bf513d24c6e632d217cccf3ad\\transformed\\appcompat-1.0.0\\res\\drawable-v21\\abc_edit_text_material.xml"
+    }
+]

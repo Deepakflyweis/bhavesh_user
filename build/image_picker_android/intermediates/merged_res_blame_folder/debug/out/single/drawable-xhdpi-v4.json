@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notify_panel_notification_icon_bg.png",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable-xhdpi-v4\\notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_normal_pressed.9.png",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable-xhdpi-v4\\notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_normal.9.png",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable-xhdpi-v4\\notification_bg_normal.9.png"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
+    }
+]

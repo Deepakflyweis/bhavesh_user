@@ -1,0 +1,431 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.flyweis.we_fast"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="20"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:3:5-67
+14-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:3:22-64
+15    <uses-permission android:name="android.permission.WAKE_LOCK" />
+15-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:4:5-67
+15-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:4:22-65
+16    <uses-permission android:name="android.permission.READ_CONTACTS" />
+16-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:5:5-71
+16-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:5:22-69
+17    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+17-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:6:5-72
+17-->C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\android\app\src\main\AndroidManifest.xml:6:22-70
+18    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+18-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+18-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+19
+20    <queries>
+20-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-12:15
+21        <package android:name="com.instagram.android" />
+21-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-57
+21-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:11:18-54
+22
+23        <intent>
+23-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-14:18
+24            <action android:name="android.accounts.AccountAuthenticator" />
+24-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-76
+24-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:13:21-73
+25        </intent> <!-- Allows the app to load an icon corresponding to the custom MIME type. -->
+26        <intent>
+26-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-23:18
+27            <action android:name="android.intent.action.VIEW" />
+27-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-65
+27-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:21-62
+28
+29            <data
+29-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-22:44
+30                android:host="com.android.contacts"
+30-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-52
+31                android:mimeType="vnd.android.cursor.item/*"
+31-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-61
+32                android:scheme="content" />
+32-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-41
+33        </intent>
+34        <intent>
+34-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:12:9-18:18
+35            <action android:name="android.intent.action.VIEW" />
+35-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-65
+35-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:21-62
+36
+37            <data
+37-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-22:44
+38                android:mimeType="*/*"
+38-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-61
+39                android:scheme="*" />
+39-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-41
+40        </intent>
+41        <intent>
+41-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:19:9-28:18
+42            <action android:name="android.intent.action.VIEW" />
+42-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-65
+42-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:21-62
+43
+44            <category android:name="android.intent.category.BROWSABLE" />
+44-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:22:13-74
+44-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:22:23-71
+45
+46            <data
+46-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-22:44
+47                android:host="pay"
+47-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-52
+48                android:mimeType="*/*"
+48-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-61
+49                android:scheme="upi" />
+49-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-41
+50        </intent>
+51        <intent>
+51-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:29:9-31:18
+52            <action android:name="android.intent.action.MAIN" />
+52-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:30:13-65
+52-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:30:21-62
+53        </intent>
+54        <intent>
+54-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:32:9-36:18
+55            <action android:name="android.intent.action.SEND" />
+55-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:33:13-65
+55-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:33:21-62
+56
+57            <data android:mimeType="*/*" />
+57-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-22:44
+57-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-61
+58        </intent> <!-- Needs to be explicitly declared on Android R+ -->
+59        <package android:name="com.google.android.apps.maps" />
+59-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:9-64
+59-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:18-61
+60    </queries>
+61
+62    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Include required permissions for Google Maps API to run. -->
+63    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+63-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:23:5-79
+63-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:23:22-76
+64
+65    <uses-feature
+65-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:26:5-28:35
+66        android:glEsVersion="0x00020000"
+66-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:27:9-41
+67        android:required="true" />
+67-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:28:9-32
+68
+69    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+69-->[com.android.installreferrer:installreferrer:1.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\c68f95c3e8ae3c6a2b4fde2657828afa\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+69-->[com.android.installreferrer:installreferrer:1.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\c68f95c3e8ae3c6a2b4fde2657828afa\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+70
+71    <application
+72        android:name="android.app.Application"
+73        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+73-->[androidx.core:core:1.8.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\aa7ce53560a257c11fb7aca0c684a022\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+74        android:debuggable="true"
+75        android:icon="@mipmap/ic_launcher"
+76        android:label="we_fast"
+77        android:supportsRtl="true" >
+77-->[com.facebook.android:facebook-share:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\e51c593556f309af1a5f090170574126\transformed\jetified-facebook-share-5.15.3\AndroidManifest.xml:28:18-44
+78        <meta-data
+79            android:name="com.google.android.geo.API_KEY"
+80            android:value="AIzaSyDQ__1W3C2GYf95cWNIN9g3AjPbgpFaev0" />
+81
+82        <activity
+83            android:name="com.flyweis.we_fast.MainActivity"
+84            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+85            android:exported="true"
+86            android:hardwareAccelerated="true"
+87            android:launchMode="singleTop"
+88            android:theme="@style/LaunchTheme"
+89            android:windowSoftInputMode="adjustResize" >
+90
+91            <!--
+92                 Specifies an Android theme to apply to this Activity as soon as
+93                 the Android process has started. This theme is visible to the user
+94                 while the Flutter UI initializes. After that, this theme continues
+95                 to determine the Window background behind the Flutter UI.
+96            -->
+97            <meta-data
+98                android:name="io.flutter.embedding.android.NormalTheme"
+99                android:resource="@style/NormalTheme" />
+100
+101            <intent-filter>
+102                <action android:name="android.intent.action.MAIN" />
+102-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:30:13-65
+102-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:30:21-62
+103
+104                <category android:name="android.intent.category.LAUNCHER" />
+105            </intent-filter>
+106        </activity>
+107        <activity
+108            android:name="com.yalantis.ucrop.UCropActivity"
+109            android:screenOrientation="portrait"
+110            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+111        <!--
+112             Don't delete the meta-data below.
+113             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+114        -->
+115        <meta-data
+116            android:name="flutterEmbedding"
+117            android:value="2" />
+118
+119        <provider
+119-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:15:9-23:20
+120            android:name="zhuoyuan.li.fluttershareme.util.ShareFileProvider"
+120-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-77
+121            android:authorities="com.flyweis.we_fast.provider"
+121-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-60
+122            android:exported="false"
+122-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+123            android:grantUriPermissions="true" >
+123-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-47
+124            <meta-data
+124-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-22:54
+125                android:name="android.support.FILE_PROVIDER_PATHS"
+125-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-67
+126                android:resource="@xml/file_paths" />
+126-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-51
+127        </provider>
+128        <provider
+128-->[:image_picker_android] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\image_picker_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
+129            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+129-->[:image_picker_android] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\image_picker_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-82
+130            android:authorities="com.flyweis.we_fast.flutter.image_provider"
+130-->[:image_picker_android] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\image_picker_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
+131            android:exported="false"
+131-->[:image_picker_android] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\image_picker_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
+132            android:grantUriPermissions="true" >
+132-->[:image_picker_android] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\image_picker_android\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-47
+133            <meta-data
+133-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-22:54
+134                android:name="android.support.FILE_PROVIDER_PATHS"
+134-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-67
+135                android:resource="@xml/flutter_image_picker_file_paths" />
+135-->[:flutter_share_me] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\flutter_share_me\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-51
+136        </provider>
+137
+138        <uses-library
+138-->[androidx.window:window:1.0.0-beta04] C:\Users\FLYWEIS\.gradle\caches\transforms-3\ef70a01e0695276f13fd2ce8636f7df2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+139            android:name="androidx.window.extensions"
+139-->[androidx.window:window:1.0.0-beta04] C:\Users\FLYWEIS\.gradle\caches\transforms-3\ef70a01e0695276f13fd2ce8636f7df2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+140            android:required="false" />
+140-->[androidx.window:window:1.0.0-beta04] C:\Users\FLYWEIS\.gradle\caches\transforms-3\ef70a01e0695276f13fd2ce8636f7df2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+141        <uses-library
+141-->[androidx.window:window:1.0.0-beta04] C:\Users\FLYWEIS\.gradle\caches\transforms-3\ef70a01e0695276f13fd2ce8636f7df2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+142            android:name="androidx.window.sidecar"
+142-->[androidx.window:window:1.0.0-beta04] C:\Users\FLYWEIS\.gradle\caches\transforms-3\ef70a01e0695276f13fd2ce8636f7df2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+143            android:required="false" />
+143-->[androidx.window:window:1.0.0-beta04] C:\Users\FLYWEIS\.gradle\caches\transforms-3\ef70a01e0695276f13fd2ce8636f7df2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+144
+145        <receiver
+145-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:40:9-46:20
+146            android:name="com.razorpay.RzpTokenReceiver"
+146-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:41:13-57
+147            android:exported="false" >
+147-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:42:13-37
+148            <intent-filter>
+148-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:43:13-45:29
+149                <action android:name="rzp.device_token.share" />
+149-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:44:17-65
+149-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:44:25-62
+150            </intent-filter>
+151        </receiver>
+152
+153        <activity
+153-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:48:9-60:20
+154            android:name="com.razorpay.CheckoutActivity"
+154-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:49:13-57
+155            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+155-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:50:13-83
+156            android:exported="true"
+156-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:51:13-36
+157            android:theme="@style/CheckoutTheme" >
+157-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:52:13-49
+158            <intent-filter>
+158-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:53:13-59:29
+159                <action android:name="android.intent.action.MAIN" />
+159-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:30:13-65
+159-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:30:21-62
+160
+161                <data
+161-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-22:44
+162                    android:host="rzp.io"
+162-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-52
+163                    android:scheme="io.rzp" />
+163-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-41
+164            </intent-filter>
+165        </activity>
+166
+167        <meta-data
+167-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:62:9-64:58
+168            android:name="com.razorpay.plugin.googlepay_all"
+168-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:63:13-61
+169            android:value="com.razorpay.RzpGpayMerged" /> <!-- Needs to be explicitly declared on P+ -->
+169-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:64:13-55
+170        <uses-library
+170-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:39:9-41:40
+171            android:name="org.apache.http.legacy"
+171-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:40:13-50
+172            android:required="false" />
+172-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\FLYWEIS\.gradle\caches\transforms-3\d4b1d13d1a7d601ba0a5788ed4921ae0\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:41:13-37
+173
+174        <activity
+174-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:23:9-27:75
+175            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+175-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:24:13-93
+176            android:excludeFromRecents="true"
+176-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:25:13-46
+177            android:exported="false"
+177-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:26:13-37
+178            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+178-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:27:13-72
+179        <!--
+180            Service handling Google Sign-In user revocation. For apps that do not integrate with
+181            Google Sign-In, this service will never be started.
+182        -->
+183        <service
+183-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:33:9-36:110
+184            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+184-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:34:13-89
+185            android:exported="true"
+185-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:35:13-36
+186            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
+186-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\19edc655421846e4ec0d7ac61bdf16be\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:36:13-107
+187
+188        <activity
+188-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\7b88e5870361a5cc59421ffe866508e2\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+189            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+189-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\7b88e5870361a5cc59421ffe866508e2\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+190            android:exported="false"
+190-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\7b88e5870361a5cc59421ffe866508e2\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+191            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+191-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\7b88e5870361a5cc59421ffe866508e2\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+192
+193        <meta-data
+193-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\4c2e493aec4786dc10c1fa6a2eb8e900\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+194            android:name="com.google.android.gms.version"
+194-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\4c2e493aec4786dc10c1fa6a2eb8e900\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+195            android:value="@integer/google_play_services_version" />
+195-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\FLYWEIS\.gradle\caches\transforms-3\4c2e493aec4786dc10c1fa6a2eb8e900\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+196
+197        <activity
+197-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:30:9-33:66
+198            android:name="com.facebook.FacebookActivity"
+198-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:31:13-57
+199            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+199-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:32:13-96
+200            android:theme="@style/com_facebook_activity_theme" />
+200-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:33:13-63
+201        <activity android:name="com.facebook.CustomTabMainActivity" />
+201-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:34:9-71
+201-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:34:19-68
+202        <activity
+202-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:35:9-49:20
+203            android:name="com.facebook.CustomTabActivity"
+203-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:36:13-58
+204            android:exported="true" >
+204-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:37:13-36
+205            <intent-filter>
+205-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:39:13-48:29
+206                <action android:name="android.intent.action.VIEW" />
+206-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-65
+206-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:17:21-62
+207
+208                <category android:name="android.intent.category.DEFAULT" />
+208-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:42:17-76
+208-->[com.facebook.android:facebook-common:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\3861f57b12bc711297ced4a350f5de93\transformed\jetified-facebook-common-5.15.3\AndroidManifest.xml:42:27-73
+209                <category android:name="android.intent.category.BROWSABLE" />
+209-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:22:13-74
+209-->[com.razorpay:checkout:1.6.19] C:\Users\FLYWEIS\.gradle\caches\transforms-3\9f12c16a6246600671173ea3e1c325d4\transformed\jetified-checkout-1.6.19\AndroidManifest.xml:22:23-71
+210
+211                <data
+211-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-22:44
+212                    android:host="cct.com.flyweis.we_fast"
+212-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-52
+213                    android:scheme="fbconnect" />
+213-->[:contacts_service] C:\Users\FLYWEIS\Desktop\bhaveshwefast-userapp\build\contacts_service\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-41
+214            </intent-filter>
+215        </activity>
+216        <!--
+217         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+218         with the application context. This config is merged in with the host app's manifest,
+219         but there can only be one provider with the same authority activated at any given
+220         point; so if the end user has two or more different apps that use Facebook SDK, only the
+221         first one will be able to use the provider. To work around this problem, we use the
+222         following placeholder in the authority to identify each host application as if it was
+223         a completely different provider.
+224        -->
+225        <provider
+225-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:39:9-42:40
+226            android:name="com.facebook.internal.FacebookInitProvider"
+226-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:40:13-70
+227            android:authorities="com.flyweis.we_fast.FacebookInitProvider"
+227-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:41:13-72
+228            android:exported="false" />
+228-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:42:13-37
+229
+230        <receiver
+230-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:44:9-50:20
+231            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+231-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:45:13-86
+232            android:exported="false" >
+232-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:46:13-37
+233            <intent-filter>
+233-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:47:13-49:29
+234                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+234-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:48:17-95
+234-->[com.facebook.android:facebook-core:5.15.3] C:\Users\FLYWEIS\.gradle\caches\transforms-3\b9f254e29349c9a54d2c7c010ba16a9c\transformed\jetified-facebook-core-5.15.3\AndroidManifest.xml:48:25-92
+235            </intent-filter>
+236        </receiver>
+237
+238        <activity
+238-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:28:9-31:49
+239            android:name="com.twitter.sdk.android.tweetui.PlayerActivity"
+239-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:29:13-74
+240            android:configChanges="keyboardHidden|orientation|screenSize"
+240-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:30:13-74
+241            android:theme="@style/MediaTheme" />
+241-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:31:13-46
+242        <activity
+242-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:32:9-34:49
+243            android:name="com.twitter.sdk.android.tweetui.GalleryActivity"
+243-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:33:13-75
+244            android:theme="@style/MediaTheme" />
+244-->[com.twitter.sdk.android:tweet-ui:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\8e505fafaa2ed2da918dfb5112ed5e00\transformed\jetified-tweet-ui-3.1.1\AndroidManifest.xml:34:13-46
+245        <activity
+245-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:28:9-31:71
+246            android:name="com.twitter.sdk.android.tweetcomposer.ComposerActivity"
+246-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:29:13-82
+247            android:exported="false"
+247-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:30:13-37
+248            android:windowSoftInputMode="adjustResize|stateVisible" />
+248-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:31:13-68
+249
+250        <service
+250-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:33:9-36:40
+251            android:name="com.twitter.sdk.android.tweetcomposer.TweetUploadService"
+251-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:34:13-84
+252            android:enabled="true"
+252-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:35:13-35
+253            android:exported="false" />
+253-->[com.twitter.sdk.android:tweet-composer:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\99cfad6dfa92225633dd6ef3746e51e6\transformed\jetified-tweet-composer-3.1.1\AndroidManifest.xml:36:13-37
+254
+255        <activity
+255-->[com.twitter.sdk.android:twitter-core:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\2151971ef05627a067435a7892e0caff\transformed\jetified-twitter-core-3.1.1\AndroidManifest.xml:28:9-32:40
+256            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
+256-->[com.twitter.sdk.android:twitter-core:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\2151971ef05627a067435a7892e0caff\transformed\jetified-twitter-core-3.1.1\AndroidManifest.xml:29:13-79
+257            android:configChanges="orientation|screenSize"
+257-->[com.twitter.sdk.android:twitter-core:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\2151971ef05627a067435a7892e0caff\transformed\jetified-twitter-core-3.1.1\AndroidManifest.xml:30:13-59
+258            android:excludeFromRecents="true"
+258-->[com.twitter.sdk.android:twitter-core:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\2151971ef05627a067435a7892e0caff\transformed\jetified-twitter-core-3.1.1\AndroidManifest.xml:31:13-46
+259            android:exported="false" />
+259-->[com.twitter.sdk.android:twitter-core:3.1.1] C:\Users\FLYWEIS\.gradle\caches\transforms-3\2151971ef05627a067435a7892e0caff\transformed\jetified-twitter-core-3.1.1\AndroidManifest.xml:32:13-37
+260    </application>
+261
+262</manifest>

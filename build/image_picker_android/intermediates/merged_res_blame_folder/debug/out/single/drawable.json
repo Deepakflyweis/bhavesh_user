@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable\\notification_bg_low.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable\\notification_icon_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable\\notification_tile_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\image_picker_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\aa7ce53560a257c11fb7aca0c684a022\\transformed\\core-1.8.0\\res\\drawable\\notification_bg.xml"
+    }
+]

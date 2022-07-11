@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\razorpay_flutter\\intermediates\\res\\merged\\release\\drawable-watch-v20\\common_google_signin_btn_text_disabled.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\19edc655421846e4ec0d7ac61bdf16be\\transformed\\jetified-play-services-auth-17.0.0\\res\\drawable-watch-v20\\common_google_signin_btn_text_disabled.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\razorpay_flutter\\intermediates\\res\\merged\\release\\drawable-watch-v20\\common_google_signin_btn_text_dark_normal.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\19edc655421846e4ec0d7ac61bdf16be\\transformed\\jetified-play-services-auth-17.0.0\\res\\drawable-watch-v20\\common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "C:\\Users\\FLYWEIS\\Desktop\\bhaveshwefast-userapp\\build\\razorpay_flutter\\intermediates\\res\\merged\\release\\drawable-watch-v20\\common_google_signin_btn_text_light_normal.xml",
+        "source": "C:\\Users\\FLYWEIS\\.gradle\\caches\\transforms-3\\19edc655421846e4ec0d7ac61bdf16be\\transformed\\jetified-play-services-auth-17.0.0\\res\\drawable-watch-v20\\common_google_signin_btn_text_light_normal.xml"
+    }
+]
